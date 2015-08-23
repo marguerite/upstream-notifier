@@ -1,0 +1,20 @@
+{
+"libzhuyin":{
+	"name":"libzhuyin",
+	"version":"1.0.91",
+	"catag":"github",
+	"url":"https://github.com/libzhuyin/libzhuyin"
+	},
+"ibus-libzhuyin":{
+	"name":"ibus-libzhuyin",
+	"version":"1.7.4",
+	"catag":"github",
+	"url":"https://github.com/libzhuyin/ibus-libzhuyin"
+	},
+"fcitx-zhuyin":{
+	"name":"fcitx-zhuyin",
+	"version":"0.0.0+git20150626.36064e1",
+	"catag":"github",
+	"url":"https://github.com/fcitx/fcitx-zhuyin"
+	}
+}
