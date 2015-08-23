@@ -26,6 +26,8 @@ notiMethod = opts["global"]["notification"]
 
 config.each_value do |pkg|
 
+	p "processing #{pkg['name']}"
+
 	mods.each do |m|
 
 		if pkg['catag'] == m

@@ -16,5 +16,47 @@
 	"version":"0.0.0+git20150626.36064e1",
 	"catag":"github",
 	"url":"https://github.com/fcitx/fcitx-zhuyin"
+	},
+"brise":{
+	"name":"brise",
+	"version":"0.36+git20150729.5c843e",
+	"catag":"github",
+	"url":"https://github.com/rime/brise"
+	},
+"librime":{
+	"name":"librime",
+	"version":"1.2.9+git20150802.ee3029e",
+	"catag":"github",
+	"url":"https://github.com/rime/librime"
+	},
+"ibus-rime":{
+	"name":"ibus-rime",
+	"version":"rime-1.2.9+git20150802.ee3029e",
+	"catag":"github",
+	"url":"https://github.com/lotem/ibus-rime"
+	},
+"fcitx-rime":{
+	"name":"fcitx-rime",
+	"version":"0.3.1",
+	"catag":"github",
+	"url":"https://github.com/fcitx/fcitx-rime"
+	},
+"sunpinyin":{
+	"name":"sunpinyin",
+	"version":"2.0.4",
+	"catag":"github",
+	"url":"https://github.com/sunpinyin/sunpinyin"
+	},
+"googletest":{
+	"name":"googletest",
+	"version":"release-1.7.0",
+	"catag":"github",
+	"url":"https://github.com/google/googletest"
+	},
+"presage":{
+	"name":"presage",
+	"version":"0.9.1",
+	"catag":"sourceforge",
+	"url":"http://presage.sourceforge.net"
 	}
 }

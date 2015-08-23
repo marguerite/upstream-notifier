@@ -2,6 +2,7 @@ class Config
 
 	require 'json'
 	require 'fileutils'
+	require 'date'
 
 	NAME = "upstream-notifier"
 
@@ -82,6 +83,9 @@ class Config
 
 		end
 
+		date = Time.now.strftime("%Y%m%d")
+
+		FileUtils.mv(@config,@config + '.old.' + date)
 		FileUtils.mv(@config + '.new',@config)
 
 	end
