@@ -26,4 +26,10 @@ upstream notifier is a packager helper that sends you email
 
 `catag` can be other sources like "googlecode", "sourceforge" (currently only github is supported).
 
+# Catag
+
+To add new Catag, you can just place a `<yours>.rb` in /mod.
+
+Make sure it defines a class names "Yours" (first letter capitalized), which provides an initialize(url,version) function and a check function that returns the new release number.
+
 ***Early Development stage, do not use***

@@ -1,26 +1,48 @@
 #!/usr/bin/env ruby
 
 require_relative 'config.rb'
+require_relative 'options.rb'
+
+mods = []
+changed = {}
 
 Dir.foreach('./mod') do |mod|
-	require_relative 'mod/' + mod unless (mod == '.' || mod == '..')	
+	mods << mod.gsub("\.rb",'') unless (mod == '.' || mod == '..')	
 end
 
-configObject = Config.new('config.json')
+mods.each do |m|
+	require_relative 'mod/' + m + '.rb'
+end
 
-config = configObject.parse
+configObj = Config.new('config.json')
 
-changed = {}
+config = configObj.parse
+
+optObj = Options.new('options.json')
+
+opts = optObj.parse
+
+notiMethod = opts["global"]["notification"]
 
 config.each_value do |pkg|
 
-	if pkg['catag'] == 'github'
+	mods.each do |m|
 
-		version = Github.new(pkg['url'],pkg['version']).check
+		if pkg['catag'] == m
 
-		unless pkg['version'] == 'nil'
+			version = Object.const_get(m.capitalize).new(pkg['url'],pkg['version']).check
 
-			if version > pkg['version']
+			unless pkg['version'] == 'nil'
+
+				if version > pkg['version']
+
+					p "there's new release #{version} for #{pkg['name']}"
+
+					changed[pkg['name']] = [pkg['version'],version]
+
+				end
+
+			else
 
 				p "there's new release #{version} for #{pkg['name']}"
 
@@ -28,16 +50,10 @@ config.each_value do |pkg|
 
 			end
 
-		else
-
-			p "there's new release #{version} for #{pkg['name']}"
-
-			changed[pkg['name']] = [pkg['version'],version]
-
 		end
 
 	end
 
 end
 
-configObject.write(changed) unless changed.empty?
+configObj.write(changed) unless changed.empty?
