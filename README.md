@@ -32,6 +32,8 @@ To add new mod, you can just place a `<yours>.rb` in /mod.
 
 Make sure it defines a class names "Yours" (first letter capitalized), which provides an initialize(url,version) function and a check function that returns the new release number.
 
+You can reuse any mod that presents, example see mod/fcitx.mod which reused github mod.
+
 # Available Mods
 
 * github: almost done

@@ -1,5 +1,8 @@
-* github.rb: force git even new release
+* github.rb:
+** force git even new release
+** use latest release as prefix in lastCommit
 * sourceforge.rb
+* cgit.rb: use lastest release as prefix in lastCommit
 * pypi.rb
 * bitbucket.rb
 * googlecode.rb

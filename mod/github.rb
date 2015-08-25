@@ -45,7 +45,7 @@ class Github
 
 		date = commitDate()
 
-		if @version == "nil"
+		if ( @version == "nil" || @version.empty? )
 
 			prefix = "0.0.0+git#{date}."
 
