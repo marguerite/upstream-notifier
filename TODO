@@ -1,0 +1,9 @@
+* github.rb: force git even new release
+* sourceforge.rb
+* pypi.rb
+* bitbucket.rb
+* googlecode.rb
+* npmjs.rb
+* golangorg.rb
+* nodejs.rb
+* launchpad.rb

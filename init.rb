@@ -30,7 +30,7 @@ config.each_value do |pkg|
 
 	mods.each do |m|
 
-		if pkg['catag'] == m
+		if pkg['mod'] == m
 
 			version = Object.const_get(m.capitalize).new(pkg['url'],pkg['version']).check
 
