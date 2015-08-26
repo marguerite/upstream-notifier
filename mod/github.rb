@@ -1,3 +1,5 @@
+#!/usr/bin/env ruby
+
 class Github
 
 	require 'rubygems'
@@ -71,34 +73,9 @@ class Github
 
 		y = x[0].split(/\s/)	
 
-		day = y[1]
+		month = returnMonth(y[0])
 
-		case y[0]
-		when "Jan"
-        		month = "01"
-		when "Feb"
-        		month = "02"
-		when "Mar"
-        		month = "03"
-		when "Apr"
-        		month = "04"
-		when "May"
-        		month = "05"
-		when "Jun"
-        		month = "06"
-		when "Jul"
-        		month = "07"
-		when "Aug"
-        		month = "08"
-		when "Sep"
-        		month = "09"
-		when "Oct"
-        		month = "10"
-		when "Nov"
-        		month = "11"
-		when "Dec"
-        		month = "12"
-		end
+		day = y[1]
 
 		date = year + month + day
 

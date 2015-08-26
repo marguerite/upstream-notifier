@@ -1,11 +1,11 @@
-#!/usr/bin/env ruby
-
 class Fcitx
 
 	require 'nokogiri'
 	require 'open-uri'
 	require 'date'
 	require_relative 'github.rb'
+	require_relative '../utils.rb'
+	include Utils
 
 	MONTH_NO_UPDATE = 6
 
@@ -29,33 +29,36 @@ class Fcitx
 
 	def check()
 
+		release = lastRelease()
+		commit = lastCommit()
+		rd = releaseDate().to_i
+		now = Time.now.strftime("%Y%m").to_i
+
 		if ( @version == "nil" || @version.empty? )
 
-			if lastRelease()
+			if release
 
-				return lastRelease()
+				return release
 
 			else
 
-				return lastCommit()
+				return commit
 
 			end
 
-		elsif @version == lastRelease()
+		elsif @version.index("+")
 
-			return lastCommit()
+			return commit
 
 		else
 
-			month = Time.now.strftime("%Y%m")
+			if ( now - rd ) >= MONTH_NO_UPDATE
 
-			if ( month.to_i - releaseDate[4..5].to_i ) >= MONTH_NO_UPDATE
-
-				return lastCommit
+				return commit
 
 			else
 
-				return lastRelease
+				return release
 
 			end	
 
@@ -84,32 +87,7 @@ class Fcitx
 
 		year = darray[3]
 
-		case darray[1]
-		when "Jan"
-                        month = "01"
-                when "Feb"
-                        month = "02"
-                when "Mar"
-                        month = "03"
-                when "Apr"
-                        month = "04"
-                when "May"
-                        month = "05"
-                when "Jun"
-                        month = "06"
-                when "Jul"
-                        month = "07"
-                when "Aug"
-                        month = "08"
-                when "Sep"
-                        month = "09"
-                when "Oct"
-                        month = "10"
-                when "Nov"
-			month = "11"
-		when "Dec"
-			month = "12"
-		end
+		month = returnMonth(darray[1])
 
 		date = year + month + day
 
@@ -129,4 +107,3 @@ class Fcitx
 
 end
 
-p Fcitx.new("fcitx-sunpinyin","0.4.0").check
