@@ -1,15 +1,21 @@
-#!/usr/bin/env ruby
-
 class Github
 
 	require 'rubygems'
 	require 'nokogiri'
 	require 'open-uri'
 	require 'date'
+	require_relative '../utils.rb'
+	include Utils
+
+	MONTN_NO_UPDATE = 6
 
 	def initialize(url='',version='')
 
-		@url = url
+		if url.index("github.com")
+			@url = url
+		else
+			@url = "https://github.com/" + url
+		end
 
 		@version = version
 
@@ -17,20 +23,35 @@ class Github
 
 	def check()
 
-		if @version == "nil"
+                release = lastRelease()
+                commit = lastCommit()
+                rd = releaseDate()
+                now = Time.now.strftime("%Y%m").to_i
 
-			lastCommit()
+                if ( @version == "nil" || @version.empty? )
+                        if release
+                                return release
+                        else
+                                return commit
+                        end
+                elsif @version.index("+")
 
-		elsif ! @version.index('git')
+                        return commit
 
-			lastRelease()
+                else
 
-		else
+                        if ( now - rd ) > MONTH_NO_UPDATE
 
-			lastCommit()
+                                return commit
 
-		end	
+                        else
 
+                                return release
+
+                        end
+
+                end
+	
 	end
 
 	def lastRelease()
@@ -39,7 +60,19 @@ class Github
 
 		return release
 
-	end 
+	end
+
+	def releaseDate()
+
+		dstring = Nokogiri::HTML(open(@url + '/releases')).xpath('//ul[@class="release-timeline-tags"]/li[1]/span/time/@datetime').first.value.gsub(/T.*$/,'')
+
+		darray = dstring.split('-')
+
+		date = darray[0] + darray[1]
+
+		return date
+
+	end
 
 	def lastCommit()
 
@@ -84,3 +117,4 @@ class Github
 	end
 
 end
+

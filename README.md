@@ -36,8 +36,10 @@ You can reuse any mod that presents, example see mod/fcitx.mod which reused gith
 
 # Available Mods
 
-* github: almost done
+* github
 * sourceforge: still needs polishing for some specfial exceptions
 * cgit: used for those projects hosting on git.savannah.(non)gnu.org or other scm services powered by cgit like git.kernel.org
+* googlecode
+* launchpad
 
 ***Early Development stage, do not use***

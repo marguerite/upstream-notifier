@@ -13,13 +13,13 @@
 	},
 "fcitx-zhuyin":{
 	"name":"fcitx-zhuyin",
-	"version":"0.0.0+git20150626.36064e1",
+	"version":"4.2.9_dict",
 	"mod":"github",
 	"url":"https://github.com/fcitx/fcitx-zhuyin"
 	},
 "brise":{
 	"name":"brise",
-	"version":"0.36+git20150729.5c843e",
+	"version":"0.36+git20150824.40b697b",
 	"mod":"github",
 	"url":"https://github.com/rime/brise"
 	},
@@ -37,7 +37,7 @@
 	},
 "fcitx-rime":{
 	"name":"fcitx-rime",
-	"version":"0.3.1",
+	"version":"4.2.9_dict",
 	"mod":"github",
 	"url":"https://github.com/fcitx/fcitx-rime"
 	},
@@ -61,7 +61,7 @@
 	},
 "opencc":{
 	"name":"opencc",
-	"version":"1.0.3",
+	"version":"ver.1.0.3",
 	"mod":"github",
 	"url":"https://github.com/BYVoid/OpenCC"
 	},
@@ -100,5 +100,17 @@
 	"version":"1.2.0+git20150413.be6e20b",
 	"mod":"github",
 	"url":"https://github.com/ueno/libskk"
+	},
+"fcitx":{
+	"name":"fcitx",
+	"version":"4.2.9_dict",
+	"mod":"fcitx",
+	"url":"fcitx"
+	},
+"gnugo":{
+	"name":"gnugo",
+	"version":"rel-3-9-1+git20130613.84a32e9",
+	"mod":"cgit",
+	"url":"http://git.savannah.gnu.org/cgit/gnugo.git"
 	}
 }
