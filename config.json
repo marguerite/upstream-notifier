@@ -112,5 +112,23 @@
 	"version":"rel-3-9-1+git20130613.84a32e9",
 	"mod":"cgit",
 	"url":"http://git.savannah.gnu.org/cgit/gnugo.git"
+	},
+"rubygem-qtbindings":{
+	"name":"rubygem-qtbindings",
+	"version":"4.8.6.2",
+	"mod":"rubygems",
+	"url":"qtbindings"
+	},
+"perl-Devel-Cover":{
+	"name":"perl-Devel-Cover",
+	"version":"1.20",
+	"mod":"cpan",
+	"url":"Devel::Cover"
+	},
+"python-faulthandler":{
+	"name":"python-faulthandler",
+	"version":"2.4",
+	"mod":"pypi",
+	"url":"faulthandler"
 	}
 }
