@@ -7,7 +7,7 @@ class Github
 	require_relative '../utils.rb'
 	include Utils
 
-	MONTN_NO_UPDATE = 6
+	MONTH_NO_UPDATE = 6
 
 	def initialize(url='',version='')
 
@@ -25,7 +25,7 @@ class Github
 
                 release = lastRelease()
                 commit = lastCommit()
-                rd = releaseDate()
+                rd = releaseDate().to_i
                 now = Time.now.strftime("%Y%m").to_i
 
                 if ( @version == "nil" || @version.empty? )
@@ -64,13 +64,21 @@ class Github
 
 	def releaseDate()
 
+	    if Nokogiri::HTML(open(@url + '/releases')).at_xpath('//ul[@class="release-timeline-tags"]')
+
 		dstring = Nokogiri::HTML(open(@url + '/releases')).xpath('//ul[@class="release-timeline-tags"]/li[1]/span/time/@datetime').first.value.gsub(/T.*$/,'')
 
 		darray = dstring.split('-')
 
 		date = darray[0] + darray[1]
 
-		return date
+	    else
+
+		date = "000000"
+
+	    end
+
+	    return date
 
 	end
 
