@@ -56,7 +56,7 @@ class Github
 
 	def lastRelease()
 
-		release = Nokogiri::HTML(open(@url + '/releases')).css('div.wrapper div.site div.container div.repository-content div.release-timeline ul.release-timeline-tags li:nth-child(1) div.main div.tag-info span.tag-name').text
+		release = Nokogiri::HTML(open(@url + '/releases')).xpath('//ul[@class="release-timeline-tags"]/li[1]/div/div/h3/a/span').text
 
 		return release
 
@@ -76,21 +76,21 @@ class Github
 
 	def lastCommit()
 
-		commit = Nokogiri::HTML(open(@url + '/commits/master')).css('div.wrapper div.site div.container div.repo-container div.repository-content div.commits-listing ol.commit-group').first.css('li:nth-child(1) div.commit-links-cell div.commit-links-group a.sha').text.strip!
+		commit = Nokogiri::HTML(open(@url + '/commits/master')).xpath('//ol[contains(@class,"commit-group")]/li[1]/div[3]/div/a').first.text.strip!
 
 		date = commitDate()
 
 		if ( @version == "nil" || @version.empty? )
 
-			prefix = "0.0.0+git#{date}."
+			prefix = "0.0.0"
 
 		else
 
-			prefix = @version.gsub(/\+.*$/,'') + '+git' + date + '.'
+			prefix = @version.gsub(/\+.*$/,'')
 
 		end
 
-		version = prefix + commit
+		version = prefix + "+git" + date + '.' + commit
 
 		return version
 
@@ -98,7 +98,7 @@ class Github
 
 	def commitDate()
 
-		dstring = Nokogiri::HTML(open(@url + '/commits/master')).css('div.wrapper div.site div.container div.repo-container div.repository-content div.commits-listing div.commit-group-title').first.text.strip!
+		dstring = Nokogiri::HTML(open(@url + '/commits/master')).xpath('//div[@class="commit-group-title"]').first.text.strip!
 
 		x = dstring.gsub(/^.*on\s/,'').split(',')
 
