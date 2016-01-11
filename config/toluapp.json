@@ -1,0 +1,8 @@
+{
+"lua51-toluapp":{
+        "name":"toluapp",
+        "version":"1.0.93",
+        "mod":"github",
+        "url":"https://github.com/LuaDist/toluapp"
+        }
+}

@@ -1,0 +1,8 @@
+{
+"shadowsocks-go":{
+        "name":"shadowsocks-go",
+        "version":"1.1.4",
+        "mod":"github",
+        "url":"https://github.com/shadowsocks/shadowsocks-go"
+        }
+}

@@ -14,13 +14,9 @@ mods.each do |m|
 	require_relative 'mod/' + m + '.rb'
 end
 
-configObj = Config.new('config.json')
+config = Config.new('config.json').parse
 
-config = configObj.parse
-
-optObj = Options.new('options.json')
-
-opts = optObj.parse
+opts = Options.new('options.json').parse
 
 notiMethod = opts["global"]["notification"]
 
@@ -58,4 +54,4 @@ config.each_value do |pkg|
 
 end
 
-configObj.write(changed) unless changed.empty?
+Config.new('config.json').write(changed) unless changed.empty?

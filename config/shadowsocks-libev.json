@@ -1,0 +1,8 @@
+{
+"shadowsocks-libev":{
+        "name":"shadowsocks-libev",
+        "version":"2.4.3",
+        "mod":"github",
+        "url":"https://github.com/shadowsocks/shadowsocks-libev"
+        }
+}
