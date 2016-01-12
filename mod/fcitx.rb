@@ -15,7 +15,7 @@ class Fcitx
 
 		unless url.index("download.fcitx-im.org") then
 
-			@url = "http://download.fcitx-im.org/" + url
+			@url = "https://download.fcitx-im.org/" + url
 
 		else
 
@@ -97,7 +97,7 @@ class Fcitx
 
 	def lastCommit()
 
-		url = "https://github.com/fcitx/" + @url.gsub("http://",'').gsub(/^.*org/,'').gsub("/",'')
+		url = "https://github.com/fcitx/" + @url.gsub(/^.*\//,'')
 
 		version = Github.new(url,@version).lastCommit
 

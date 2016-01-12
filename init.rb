@@ -3,8 +3,8 @@
 require_relative 'config.rb'
 require_relative 'options.rb'
 
-mods = []
-changed = {}
+mods = Array.new
+changed = Hash.new
 
 Dir.foreach('./mod') do |mod|
 	mods << mod.gsub("\.rb",'') unless (mod == '.' || mod == '..')	
@@ -20,9 +20,11 @@ opts = Options.new('options.json').parse
 
 notiMethod = opts["global"]["notification"]
 
+threads = Array.new
+
 config.each_value do |pkg|
 
-	p "processing #{pkg['name']}"
+	thread = Thread.new {
 
 	mods.each do |m|
 
@@ -52,6 +54,12 @@ config.each_value do |pkg|
 
 	end
 
+	}
+
+	threads << thread
+
 end
+
+threads.each { |t| t.join }
 
 Config.new('config.json').write(changed) unless changed.empty?

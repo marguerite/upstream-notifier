@@ -31,7 +31,7 @@
 	},
 "ibus-rime":{
 	"name":"ibus-rime",
-	"version":"rime-1.2.9+git20150802.ee3029e",
+	"version":"1.2.9+git20150802.ee3029e",
 	"mod":"github",
 	"url":"https://github.com/lotem/ibus-rime"
 	},
