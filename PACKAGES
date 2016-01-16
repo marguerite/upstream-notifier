@@ -112,7 +112,6 @@ python-mutagen
 python3-mutagenx
 python-jieba
 leveldb
-python3-notify2
 python-backend-gstreamer-0_10
 perl-Gnome2-Vte
 python-dmidecode
@@ -195,7 +194,6 @@ m17n-db
 pyzy
 hmconv
 libuninameslist
-wqy-microhei-fonts
 libspiro
 opencc
 tamago
@@ -230,14 +228,11 @@ libotf
 uim
 perl-Net-ARP
 openyoudao
-doubanfm-qt5
 moonplayer
 xlcloudclient
 sphinxbase
 pocketsphinx
 canna-yubin
-WeCase
-python3-rpweibo
 python3-pycurl
 python3-pathlib
 kakasi

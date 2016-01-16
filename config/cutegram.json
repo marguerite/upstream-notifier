@@ -1,0 +1,20 @@
+{
+"libqtelegram-ae":{
+	"name":"libqtelegram-ae",
+	"version":"5.0",
+	"mod":"github",
+	"url":"https://github.com/Aseman-Land/libqtelegram-aseman-edition"
+	},
+"libtelegramqml":{
+	"name":"libqtelegramqml",
+	"version":"0.8.0",
+	"mod":"github",
+	"url":"https://github.com/Aseman-Land/TelegramQML"
+	},
+"cutegram":{
+	"name":"cutegram",
+	"version":"2.5.0",
+	"mod":"github",
+	"url":"https://github.com/Aseman-Land/Cutegram"
+	}
+}

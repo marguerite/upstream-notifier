@@ -101,12 +101,6 @@
 	"mod":"github",
 	"url":"https://github.com/ueno/libskk"
 	},
-"fcitx":{
-	"name":"fcitx",
-	"version":"4.2.9_dict",
-	"mod":"fcitx",
-	"url":"fcitx"
-	},
 "gnugo":{
 	"name":"gnugo",
 	"version":"rel-3-9-1+git20130613.84a32e9",

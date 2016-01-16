@@ -27,6 +27,16 @@ class Github
                 commit = lastCommit()
                 rd = releaseDate().to_i
                 now = Time.now.strftime("%Y%m").to_i
+		
+		# check date 201601 vs 201511
+		year = now/100 - rd/100 # 2016 - 2015
+		mo = now - now/100*100 # 201601 - 201600 = 01
+		# 201601 vs 201511, handle the year
+		if year > 0
+			diff = year*12 + mo - (rd - rd/100*100) # 01*12 + 01 - (201511 - 201500)
+		else
+			diff = now - rd
+		end
 
                 if ( @version == "nil" || @version.empty? )
                         if release
@@ -34,21 +44,13 @@ class Github
                         else
                                 return commit
                         end
-                elsif @version.index("+")
+		elsif diff > MONTH_NO_UPDATE
 
-                        return commit
+                       	return commit
 
                 else
 
-                        if ( now - rd ) > MONTH_NO_UPDATE
-
-                                return commit
-
-                        else
-
-                                return release
-
-                        end
+                        return release
 
                 end
 	
@@ -63,23 +65,25 @@ class Github
 	end
 
 	def releaseDate()
-
-	    if Nokogiri::HTML(open(@url + '/releases')).at_xpath('//ul[@class="release-timeline-tags"]')
-
-		dstring = Nokogiri::HTML(open(@url + '/releases')).xpath('//ul[@class="release-timeline-tags"]/li[1]/span/time/@datetime').first.value.gsub(/T.*$/,'')
+		url = @url + "/releases"
+		html = Nokogiri::HTML(open(url))
+		# with release notes or not
+		unless html.css('p.release-authorship').empty?
+			#"Nov 18, 2015"
+			raw = html.css('p.release-authorship')[0].css('time').text
+			da = raw.split(' ')
+			da[0] = returnMonth(da[0])
+			da[1] = da[1].gsub(',','')
+			dstring = da[2] + "-" + da[0] + "-" + da[1]
+		else
+			#"2015-12-22T08:05:43Z"
+			ds = html.css('ul.release-timeline-tags')[0].css('li')[0].css('span.date time').xpath('@datetime').first.value
+			dstring = ds.split('T')[0]		
+		end
 
 		darray = dstring.split('-')
-
 		date = darray[0] + darray[1]
-
-	    else
-
-		date = "000000"
-
-	    end
-
-	    return date
-
+		return date
 	end
 
 	def lastCommit()
