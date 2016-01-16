@@ -1,6 +1,6 @@
 # Upstream Notifier
 
-upstream notifier is a packager helper that sends you email
+upstream notifier (`noti`)is a packager helper that sends you email
 /shout on IRC about new upstream releases.
 
 # Features
@@ -9,6 +9,14 @@ upstream notifier is a packager helper that sends you email
   and many more
 * easy extendable with ruby (mods)
 * supports email and IRC (TODO)
+
+# System Requirement
+
+ruby and nokigiri gem.
+
+# Usage
+
+`noti <config>.json`
 
 # Configuration
 
@@ -24,7 +32,7 @@ upstream notifier is a packager helper that sends you email
 }
 </pre>
 
-`mod` can be other sources like "github", "sourceforge", "googlecode" (currently only github/cgit is supported).
+`mod` can be other sources like "github", "sourceforge", "googlecode".
 
 # Mod
 
