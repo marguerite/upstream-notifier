@@ -26,36 +26,25 @@ threads = Array.new
 
 confs.each_value do |pkg|
 
+	name = pkg['name']
+	mod = pkg['mod']
+	url = pkg['url']
+	oldver = pkg['version']
+
 	thread = Thread.new {
+		if mods.include?(mod)
+			newver = Object.const_get(mod.capitalize).new(url,oldver).check
 
-		mods.each do |m|
-
-			if pkg['mod'] == m
-
-				version = Object.const_get(m.capitalize).new(pkg['url'],pkg['version']).check
-
-				unless pkg['version'] == 'nil'
-
-					if version > pkg['version']
-
-						p "there's new release #{version} for #{pkg['name']}"
-
-						changed[pkg['name']] = [pkg['version'],version]
-
-					end
-
-				else
-
-					p "there's new release #{version} for #{pkg['name']}"
-
-					changed[pkg['name']] = [pkg['version'],version]
-
+			unless oldver == 'nil'
+				if newver > oldver
+					p "there's new release #{newver} for #{name}"
+					changed[name] = [oldver,newver]
 				end
-
+			else
+				p "there's new release #{newver} for #{name}"
+				changed[name] = [oldver,newver]
 			end
-
 		end
-
 	}
 
 	threads << thread
@@ -63,5 +52,4 @@ confs.each_value do |pkg|
 end
 
 threads.each { |t| t.join }
-
 config.write(changed) unless changed.empty?
