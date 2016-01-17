@@ -1,0 +1,20 @@
+{
+"golang-github-russross-blackfriday":{
+	"name":"blackfriday",
+	"version":"v1.4",
+	"mod":"github",
+	"url":"https://github.com/russross/blackfriday"
+	},
+"golang-github-shurcool-sanitized_anchor_name":{
+	"version":"0.0.0+git20151028.10ef21a",
+	"name":"sanitized_anchor_name",
+	"version":"0.0.0+git20151028.10ef21a",
+	"mod":"github",
+	"url":"https://github.com/shurcool/sanitized_anchor_name"
+	"version":"0.0.0+git20151028.10ef21a",
+	"name":"go-md2man",
+	"version":"v1.0.5",
+	"mod":"github",
+	"url":"https://github.com/cpuguy83/go-md2man"
+	}
+}

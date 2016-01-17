@@ -67,22 +67,28 @@ class Github
 	def releaseDate()
 		url = @url + "/releases"
 		html = Nokogiri::HTML(open(url))
-		# with release notes or not
-		unless html.css('p.release-authorship').empty?
-			#"Nov 18, 2015"
-			raw = html.css('p.release-authorship')[0].css('time').text
-			da = raw.split(' ')
-			da[0] = returnMonth(da[0])
-			da[1] = da[1].gsub(',','')
-			dstring = da[2] + "-" + da[0] + "-" + da[1]
+		# if there's any release
+		unless html.css('div.release-timeline').empty?
+			# with release notes or not
+			unless html.css('p.release-authorship').empty?
+				#"Nov 18, 2015"
+				raw = html.css('p.release-authorship')[0].css('time').text
+				da = raw.split(' ')
+				da[0] = returnMonth(da[0])
+				da[1] = da[1].gsub(',','')
+				dstring = da[2] + "-" + da[0] + "-" + da[1]
+			else
+				#"2015-12-22T08:05:43Z"
+				ds = html.css('ul.release-timeline-tags')[0].css('li')[0].css('span.date time').xpath('@datetime').first.value
+				dstring = ds.split('T')[0]		
+			end
+
+			darray = dstring.split('-')
+			date = darray[0] + darray[1]
 		else
-			#"2015-12-22T08:05:43Z"
-			ds = html.css('ul.release-timeline-tags')[0].css('li')[0].css('span.date time').xpath('@datetime').first.value
-			dstring = ds.split('T')[0]		
+			date = 000000
 		end
 
-		darray = dstring.split('-')
-		date = darray[0] + darray[1]
 		return date
 	end
 

@@ -49,5 +49,11 @@ You can reuse any mod that presents, example see mod/fcitx.mod which reused gith
 * cgit: used for those projects hosting on git.savannah.(non)gnu.org or other scm services powered by cgit like git.kernel.org
 * googlecode
 * launchpad
+* cpan
+* pypi
+* rubygems
+* npmjs
+* nodejs
+* golangorg
 
 ***Early Development stage, do not use***
