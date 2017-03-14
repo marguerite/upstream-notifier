@@ -1,8 +1,0 @@
-{
-"conky":{
-        "name":"conky",
-        "version":"1.10.1",
-        "mod":"github",
-        "url":"https://github.com/brndnmtthws/conky"
-        }
-}

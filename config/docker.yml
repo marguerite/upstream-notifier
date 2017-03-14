@@ -1,0 +1,8 @@
+---
+golang-github-russross-blackfriday:
+  version: v1.4
+  plug: github
+  url: https://github.com/russross/blackfriday
+  version: v1.0.5
+  plug: github
+  url: https://github.com/cpuguy83/go-md2man

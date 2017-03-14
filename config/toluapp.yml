@@ -1,0 +1,5 @@
+---
+lua51-toluapp:
+  version: 1.0.93
+  plug: github
+  url: https://github.com/LuaDist/toluapp

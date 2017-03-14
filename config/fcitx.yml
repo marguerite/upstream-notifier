@@ -1,0 +1,5 @@
+---
+fcitx:
+  version: 4.2.9
+  plug: fcitx
+  url: fcitx

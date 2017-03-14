@@ -1,0 +1,5 @@
+---
+conky:
+  version: 1.10.1
+  plug: github
+  url: https://github.com/brndnmtthws/conky

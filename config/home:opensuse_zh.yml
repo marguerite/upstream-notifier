@@ -1,0 +1,17 @@
+---
+doubanfm-qt5:
+  version: 2.1.0
+  plug: github
+  url: https://github.com/zonyitoo/doubanfm-qt
+WeCase:
+  version: 0.0.6
+  plug: github
+  url: https://github.com/WeCase/WeCase
+python3-rpweibo:
+  version: 0.02.2
+  plug: github
+  url: https://github.com/WeCase/rpweibo
+python3-notify2:
+  version: '0.3'
+  plug: pypi
+  url: notify2

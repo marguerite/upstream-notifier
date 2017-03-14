@@ -1,3 +1,4 @@
+{
 tweets2pdf
 hotot-qt
 proxychains-gui
@@ -268,3 +269,4 @@ pac-manager
 perl-Gtk2-SourceView2
 perl-Gtk2-GladeXML
 scws
+}

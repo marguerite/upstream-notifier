@@ -1,22 +1,15 @@
-# Upstream Notifier
+Upstream Notifier
 
-upstream notifier (`noti`)is a packager helper that sends you email
-/shout on IRC about new upstream releases.
+=====
 
-# Features
+upstream notifier is a monitoring server for packagers, usually running on Rapsberry Pi, that will sends you email / shout on IRC about new upstream releases.
+
+## Features
 
 * supports github, sourceforge.net, code.google.com, launchpad.net
   and many more
-* easy extendable with ruby (mods)
+* easy extendable with ruby (plugin system)
 * supports email and IRC (TODO)
-
-# System Requirement
-
-ruby and nokigiri gem.
-
-# Usage
-
-`noti <config>.json`
 
 # Configuration
 
@@ -32,7 +25,7 @@ ruby and nokigiri gem.
 }
 </pre>
 
-`mod` can be other sources like "github", "sourceforge", "googlecode".
+`plug` can be other sources like "github", "sourceforge", "googlecode".
 
 # Mod
 
@@ -56,4 +49,4 @@ You can reuse any mod that presents, example see mod/fcitx.mod which reused gith
 * nodejs
 * golangorg
 
-***Early Development stage, do not use***
+***Rewriting...please wait***

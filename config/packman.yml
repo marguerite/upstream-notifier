@@ -1,0 +1,5 @@
+---
+vokoscreen:
+  version: 2.4.11-beta
+  plug: github
+  url: https://github.com/vkohaupt/vokoscreen
