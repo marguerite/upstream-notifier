@@ -1,41 +1,41 @@
 Upstream Notifier
 
-=====
+======
 
-upstream notifier is a monitoring server for packagers, usually running on Rapsberry Pi, that will sends you email / shout on IRC about new upstream releases.
+upstream notifier is a monitoring server for packagers, usually running on a Rapsberry Pi.
+
+It will sends you email / shout on IRC about new upstream releases.
 
 ## Features
 
 * supports github, sourceforge.net, code.google.com, launchpad.net
   and many more
-* easy extendable with ruby (plugin system)
+* easy extendable with a plugin system
 * supports email and IRC (TODO)
 
-# Configuration
+# Configuration with YAML
 
 <pre>
-{
-	"fcitx":{
-		"name":"fcitx",
-		"version":"4.2.8.1",
-		"mod":"github",
-		"url":"https://github.com/fcitx/fcitx"
-		}
-
-}
+---
+fcitx:
+  version: 4.2.8.1
+  plug: github
+  url: https://github.com/fcitx/fcitx
 </pre>
 
-`plug` can be other sources like "github", "sourceforge", "googlecode".
+`plug` can be other services like "github", "sourceforge", "googlecode".
 
-# Mod
+# Options
 
-To add new mod, you can just place a `<yours>.rb` in /mod.
+# Plugin
 
-Make sure it defines a class names "Yours" (first letter capitalized), which provides an initialize(url,version) function and a check function that returns the new release number.
+To add new plugin, you can just place a `<your_service>.rb` in `/lib/upstream_notifier/plug`.
 
-You can reuse any mod that presents, example see mod/fcitx.mod which reused github mod.
+Make sure it defines a class named "Your_service" (first letter capitalized), which provides an initialize function with parameters `url,version,*args` and a `get` function that returns the new release number.
 
-# Available Mods
+You can reuse any plugin that presents, example see our fcitx plugin which reused the github plugin.
+
+# Available Plugins
 
 * github
 * sourceforge: still needs polishing for some specfial exceptions
