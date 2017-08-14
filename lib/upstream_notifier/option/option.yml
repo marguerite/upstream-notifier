@@ -1,11 +1,11 @@
 ---
 notification: email
 email:
-  server: ''
-  port: ''
-  from: ''
-  password: ''
-  to: ''
+  server: 'smtp.gmail.com'
+  port: 587
+  from: 'username@gmail.com'
+  password: 'password'
+  to: 'username@example.com'
 irc:
   server: ''
   channel: ''
