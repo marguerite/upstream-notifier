@@ -6,7 +6,8 @@ module UpstreamNotifier
   class Github
     def initialize(uri, old, *args)
       @old = old
-      branch, @use_git = args[0]
+      branch, @use_git = args
+      branch ||= 'master'
       uri = 'https://github.com/' + uri.sub(%r{http(s)?://github\.com/}, '')
       @release_xml = if UpstreamNotifier::Ping.new(uri + '/releases', 5000)
                                               .ping?
@@ -18,7 +19,7 @@ module UpstreamNotifier
     def get
       new = if @release_xml.nil?
               '0.0.0+git' + commit_date.strftime('%Y%m%d') + '.' + commit
-            elsif @use_git && (Date.today - release_date).to_i > 180
+            elsif !@use_git.nil? && (Date.today - release_date).to_i > 180
               # if use_git, git version will be used when the release was made
               # more than 6 months ago.
               release + '+git' + commit_date.strftime('%Y%m%d') + '.' + commit
