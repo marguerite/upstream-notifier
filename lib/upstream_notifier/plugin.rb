@@ -1,5 +1,5 @@
 module UpstreamNotifier
-  # dynamically require and call plugins in plug directory
+  # dynamically require and call plugins in plugin directory
   class Plugin
     class << self
       def method_missing(plug, *args)
@@ -27,7 +27,7 @@ module UpstreamNotifier
             .match(/(.*)\.rb$/)[1]
             .to_sym
       end
-      plugins.include?(plug) ? true : false
+      plugins.include?(plug)
     end
   end
 end

@@ -1,4 +1,5 @@
 require 'nokogiri'
+require 'node_semver'
 require 'open-uri'
 require 'date'
 
@@ -26,7 +27,7 @@ module UpstreamNotifier
             else
               release
             end
-      #      UpstreamNotifier::VCMP.new(@old, new).compare ? new : @old
+      # NodeSemver.gte(new, @old) ? new : @old
     end
 
     def release

@@ -1,0 +1,13 @@
+---
+notification: email
+email:
+  server: ''
+  port: ''
+  from: ''
+  password: ''
+  to: ''
+irc:
+  server: ''
+  channel: ''
+  user: ''
+  password: ''
