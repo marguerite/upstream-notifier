@@ -1,126 +1,111 @@
 class Googlecode
+  MONTH_NO_UPDATE = 6
 
-	MONTH_NO_UPDATE = 6
+  require 'rubygems'
+  require 'nokogiri'
+  require 'open-uri'
+  require 'date'
+  require_relative '../utils.rb'
+  include Utils
 
-	require 'rubygems'
-	require 'nokogiri'
-	require 'open-uri'
-	require 'date'
-	require_relative '../utils.rb'
-	include Utils
+  def initialize(url = '', version = '')
+    @url = if url.index('code.google.com')
+             url
+           else
+             'https://code.google.com/p/' + url
+           end
 
-	def initialize(url="",version="")
+    @version = version
+  end
 
-		if url.index("code.google.com")
-			@url = url
-		else
-			@url = "https://code.google.com/p/" + url
-		end
+  def check
+    release = lastRelease
+    commit = lastCommit
+    rd = releaseDate.to_i
+    now = Time.now.strftime('%Y%m').to_i
 
-		@version = version
+    # Logic:
+    # 0. if no version filled, then released version first
+    # 1. if has a "+" (scm symbol), then last commit first
+    # 2. if no new release for MONTH_NO_UPDATE months,
+    #    prefer last commit, else use released version
 
-	end
+    if @version == 'nil' || @version.empty?
+      if release
+        return release
+      else
+        return commit
+      end
+    elsif @version.index('+')
 
-	def check()
+      return commit
 
-		release = lastRelease()
-		commit = lastCommit()
-		rd = releaseDate().to_i
-		now = Time.now.strftime("%Y%m").to_i
+    else
 
-		# Logic: 
-		# 0. if no version filled, then released version first
-		# 1. if has a "+" (scm symbol), then last commit first
-		# 2. if no new release for MONTH_NO_UPDATE months,
-		#    prefer last commit, else use released version
+      if (now - rd) > MONTH_NO_UPDATE
 
-		if ( @version == "nil" || @version.empty? )
-			if release
-				return release
-			else
-				return commit
-			end
-		elsif @version.index("+")
+        return commit
 
-			return commit
+      else
 
-		else		
+        return release
 
-			if ( now - rd ) > MONTH_NO_UPDATE
+      end
 
-				return commit
+    end
+  end
 
-			else
+  def lastRelease
+    release = Nokogiri::HTML(open(@url + '/downloads/list')).xpath('//table[@id="resultstable"]/tr[1]/td[2]/a').text.strip!.gsub(/^.*-/, '').gsub(/\.tar.*$/, '')
 
-				return release
+    release
+  end
 
-			end
+  def releaseDate
+    dstring = Nokogiri::HTML(open(@url + '/downloads/list')).xpath('//table[@id="resultstable"]/tr[1]/td[5]/a').text.strip!
 
-		end
+    darray = dstring.split(/\s/)
 
-	end
+    year = darray[1]
 
-	def lastRelease()
+    month = returnMonth(darray[0])
 
-		release = Nokogiri::HTML(open(@url + '/downloads/list')).xpath('//table[@id="resultstable"]/tr[1]/td[2]/a').text.strip!.gsub(/^.*-/,'').gsub(/\.tar.*$/,'')
+    date = year + month
 
-		return release
+    date
+  end
 
-	end
+  def lastCommit
+    commit = Nokogiri::HTML(open(@url + '/source/list')).xpath('//table[@id="resultstable"]/tr[2]/td[1]/a').text # r147
 
-	def releaseDate()
+    scm = Nokogiri::HTML(open(@url + '/source/checkout')).xpath('//div[@class="bubble_wrapper"]/div/div[@class="box-inner"]/tt[@id="checkoutcmd"]').text.split(/\s/)[0]
 
-		dstring = Nokogiri::HTML(open(@url + '/downloads/list')).xpath('//table[@id="resultstable"]/tr[1]/td[5]/a').text.strip!
+    date = commitDate
 
-		darray = dstring.split(/\s/)
+    if @version == 'nil' || @version.empty?
+      prefix = '0.0.0+'
+    elsif
+      prefix = @version.gsub(/\+.*$/, '')
+    end
 
-		year = darray[1]
+    version = prefix + scm + date + '.' + commit
 
-		month = returnMonth(darray[0])
+    version
+  end
 
-		date = year + month
+  def commitDate
+    dstring = Nokogiri::HTML(open(@url + '/source/list')).xpath('//table[@id="resultstable"]/tr[2]/td[3]/a').text
 
-		return date
+    darray = dstring.split(/\s/)
 
-	end
+    year = darray[2]
 
-	def lastCommit()
+    month = returnMonth(darray[0])
 
-		commit = Nokogiri::HTML(open(@url + '/source/list')).xpath('//table[@id="resultstable"]/tr[2]/td[1]/a').text # r147
+    day = darray[1].delete(',')
 
-		scm = Nokogiri::HTML(open(@url + '/source/checkout')).xpath('//div[@class="bubble_wrapper"]/div/div[@class="box-inner"]/tt[@id="checkoutcmd"]').text.split(/\s/)[0]
+    date = year + month + day
 
-		date = commitDate()
-
-		if ( @version == "nil" || @version.empty? )
-			prefix = "0.0.0+"
-		elsif 
-			prefix = @version.gsub(/\+.*$/,'')
-		end 
-
-		version = prefix + scm + date + '.' + commit
-
-		return version
-
-	end
-
-	def commitDate()
-
-		dstring = Nokogiri::HTML(open(@url + '/source/list')).xpath('//table[@id="resultstable"]/tr[2]/td[3]/a').text
-
-		darray = dstring.split(/\s/)
-
-		year = darray[2]
-
-		month = returnMonth(darray[0])
-
-		day = darray[1].gsub(',','')
-
-		date = year + month + day
-
-		return date
-
-	end
-
+    date
+  end
 end
-

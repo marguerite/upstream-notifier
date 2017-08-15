@@ -1,109 +1,96 @@
 class Fcitx
+  require 'nokogiri'
+  require 'open-uri'
+  require 'date'
+  require_relative 'github.rb'
+  require_relative '../utils.rb'
+  include Utils
 
-	require 'nokogiri'
-	require 'open-uri'
-	require 'date'
-	require_relative 'github.rb'
-	require_relative '../utils.rb'
-	include Utils
+  MONTH_NO_UPDATE = 6
 
-	MONTH_NO_UPDATE = 6
+  def initialize(url = '', version = '')
+    # You can just specify by the name
 
-	def initialize(url="",version="")
+    @url = if url.index('download.fcitx-im.org')
 
-		# You can just specify by the name
+             url
 
-		unless url.index("download.fcitx-im.org") then
+           else
 
-			@url = "https://download.fcitx-im.org/" + url
+             'https://download.fcitx-im.org/' + url
 
-		else
+           end
 
-			@url = url
+    @version = version
+  end
 
-		end
+  def check
+    release = lastRelease
+    commit = lastCommit
+    rd = releaseDate.to_i
+    now = Time.now.strftime('%Y%m').to_i
 
-		@version = version
+    if @version == 'nil' || @version.empty?
 
-	end
+      if release
 
-	def check()
+        return release
 
-		release = lastRelease()
-		commit = lastCommit()
-		rd = releaseDate().to_i
-		now = Time.now.strftime("%Y%m").to_i
+      else
 
-		if ( @version == "nil" || @version.empty? )
+        return commit
 
-			if release
+      end
 
-				return release
+    elsif @version.index('+')
 
-			else
+      return commit
 
-				return commit
+    else
 
-			end
+      if (now - rd) >= MONTH_NO_UPDATE
 
-		elsif @version.index("+")
+        return commit
 
-			return commit
+      else
 
-		else
+        return release
 
-			if ( now - rd ) >= MONTH_NO_UPDATE
+      end
 
-				return commit
+    end
+  end
 
-			else
+  def lastRelease
+    tarball = Nokogiri::HTML(open(@url)).css('div#wrapper ul#files li:last-child a span.name').text
 
-				return release
+    # fcitx-sunpinyin-0.4.1.tar.xz
+    version = tarball.gsub(/^.*-/, '').gsub(/\.tar.*$/, '')
 
-			end	
+    version
+  end
 
-		end
+  def releaseDate
+    dstring = Nokogiri::HTML(open(@url)).css('div#wrapper ul#files li:last-child a span.date').text # Sun Feb 02 2014 20:41:15
 
-	end
+    darray = dstring.split(/\s/)
 
-	def lastRelease()
+    day = darray[2]
 
-		tarball = Nokogiri::HTML(open(@url)).css('div#wrapper ul#files li:last-child a span.name').text
+    year = darray[3]
 
-		# fcitx-sunpinyin-0.4.1.tar.xz
-		version = tarball.gsub(/^.*-/,'').gsub(/\.tar.*$/,'')
+    month = returnMonth(darray[1])
 
-		return version
+    date = year + month + day
 
-	end
+    date
+  end
 
-	def releaseDate()
+  def lastCommit
+    url = 'https://github.com/fcitx/' + @url.gsub(/^.*\//, '')
 
-		dstring = Nokogiri::HTML(open(@url)).css('div#wrapper ul#files li:last-child a span.date').text # Sun Feb 02 2014 20:41:15
+    version = Github.new(url, @version).lastCommit
 
-		darray = dstring.split(/\s/)
-
-		day = darray[2]
-
-		year = darray[3]
-
-		month = returnMonth(darray[1])
-
-		date = year + month + day
-
-		return date
-
-	end
-
-	def lastCommit()
-
-		url = "https://github.com/fcitx/" + @url.gsub(/^.*\//,'')
-
-		version = Github.new(url,@version).lastCommit
-
-		return version
-
-	end
-
+    version
+  end
 end
-

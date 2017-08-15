@@ -1,31 +1,24 @@
 class Cpan
+  require 'nokogiri'
+  require 'open-uri'
 
-	require 'nokogiri'
-	require 'open-uri'
+  def initialize(url = '', version = '')
+    @url = if url.index('metacpan.org')
 
-	def initialize(url="",version="")
+             url
 
-		if url.index("metacpan.org") then
+           else
 
-			@url = url
+             'https://metacpan.org/pod/' + url
 
-		else
+           end
 
-			@url = "https://metacpan.org/pod/" + url
+    @version = version
+  end
 
-		end
+  def check
+    version = Nokogiri::HTML(open(@url)).xpath('//h1[@id = "VERSION"]').first.next_element.text.split(/\s/)[1]
 
-		@version = version
-
-	end
-
-	def check()
-
-		version = Nokogiri::HTML(open(@url)).xpath('//h1[@id = "VERSION"]').first.next_element.text.split(/\s/)[1]
-
-		return version
-
-	end
-
+    version
+  end
 end
-

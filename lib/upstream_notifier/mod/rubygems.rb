@@ -1,29 +1,22 @@
 class Rubygems
+  require 'nokogiri'
+  require 'open-uri'
 
-	require 'nokogiri'
-	require 'open-uri'
+  def initialize(url = '', _version = '')
+    @url = if url.index('rubygems.org')
 
-	def initialize(url="",version="")
+             url
 
-		if url.index("rubygems.org")
+           else
 
-			@url = url
+             'https://rubygems.org/gems/' + url
 
-		else
+           end
+  end
 
-			@url = "https://rubygems.org/gems/" + url
+  def check
+    version = Nokogiri::HTML(open(@url)).xpath('//ol[contains(@class,"gem__versions")]/li[1]/a').text
 
-		end
-
-	end
-
-	def check()
-
-		version = Nokogiri::HTML(open(@url)).xpath('//ol[contains(@class,"gem__versions")]/li[1]/a').text
-
-		return version
-
-	end
-
+    version
+  end
 end
-

@@ -1,65 +1,56 @@
-#TODO: moodle and ngois check
+# TODO: moodle and ngois check
 class Sourceforge
+  require 'rubygems'
+  require 'nokogiri'
+  require 'open-uri'
+  require 'net/http'
 
-	require 'rubygems'
-	require 'nokogiri'
-	require 'open-uri'
-	require 'net/http'
+  def initialize(url = '', version = '')
+    # https://presage.sourceforge.net
+    if url.gsub(/^(https:\/\/|http:\/\/)/, '').index(/^sourceforge/)
 
-	def initialize(url='',version='')
+      @url = url
 
-		# https://presage.sourceforge.net
-		unless url.gsub(/^(https:\/\/|http:\/\/)/,'').index(/^sourceforge/)
+    else
 
-			x = url.gsub(/^(https:\/\/|http:\/\/)/,'').split('.')
+      x = url.gsub(/^(https:\/\/|http:\/\/)/, '').split('.')
 
-			# make sure url is http://sourceforge.net/projects/presage
-			@url = 'http://' + x[1] + '.' + x[2] + '/projects/' + x[0]
+      # make sure url is http://sourceforge.net/projects/presage
+      @url = 'http://' + x[1] + '.' + x[2] + '/projects/' + x[0]
 
-		else
+    end
 
-			@url = url
+    @name = @url.gsub(/^(https:\/\/|http:\/\/)/, '').split('/')[2]
 
-		end
+    @version = version
+  end
 
-		@name = @url.gsub(/^(https:\/\/|http:\/\/)/,'').split('/')[2]
+  def check
+    url = if urlExists?(@url + '/files/' + @name)
 
-		@version = version
+            @url + '/files/' + @name
 
-	end
+          else
 
-	def check
+            @url + '/files/' + @name.capatilize
 
-		if urlExists?(@url + '/files/' + @name)
+          end
 
-			url = @url + '/files/' + @name
+    release = Nokogiri::HTML(open(url)).css('div#page-body div#files table#files_list tbody tr:nth-child(1) th a').text.strip!
 
-		else
+    release
+  end
 
-			url = @url + '/files/' + @name.capatilize
+  def urlExists?(url = @url)
+    uri = URI.parse(url)
+    req = Net::HTTP.new(uri.host, uri.port)
+    req.use_ssl = (uri.scheme == 'https')
+    res = req.request_head('/')
 
-		end
-
-		release = Nokogiri::HTML(open(url)).css("div#page-body div#files table#files_list tbody tr:nth-child(1) th a").text.strip!		
-
-		return release
-
-	end
-
-	def urlExists?(url=@url)
-
-		uri = URI.parse(url)
-		req = Net::HTTP.new(uri.host,uri.port)
-		req.use_ssl = (uri.scheme == 'https')
-		res = req.request_head('/')
-
-		if res.code == "200"
-			return true
-		else
-			return false
-		end
-
-	end
-
+    if res.code == '200'
+      return true
+    else
+      return false
+    end
+  end
 end
-

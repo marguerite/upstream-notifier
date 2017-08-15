@@ -1,13 +1,13 @@
 require 'net/smtp'
 
 module UpstreamNotifier
-  class Mail
+  class Email
     def initialize(option, *args)
-      @option = option
+      @option = option[self.class.to_s.split('::')[1].downcase!]
       @name, @version = args
     end
 
-    def send
+    def get
       message = <<MESSAGE_END
 From: Upstream Notifier <
 To:

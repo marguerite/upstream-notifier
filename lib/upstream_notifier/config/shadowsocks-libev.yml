@@ -1,5 +1,5 @@
 ---
 shadowsocks-libev:
-  version: 2.4.3
-  plug: github
+  version: 3.4.0
+  plugin: github
   url: https://github.com/shadowsocks/shadowsocks-libev

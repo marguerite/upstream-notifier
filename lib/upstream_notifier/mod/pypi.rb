@@ -1,29 +1,22 @@
 class Pypi
+  require 'nokogiri'
+  require 'open-uri'
 
-	require 'nokogiri'
-	require 'open-uri'
+  def initialize(url = '', _version = '')
+    @url = if url.index('pypi.python.org')
 
-	def initialize(url="",version="")
+             url
 
-		if url.index("pypi.python.org")
+           else
 
-			@url = url
+             'https://pypi.python.org/pypi/' + url
 
-		else
+           end
+  end
 
-			@url = "https://pypi.python.org/pypi/" + url
+  def check
+    version = Nokogiri::HTML(open(@url)).xpath('//div[@id="breadcrumb"]/a[3]').text
 
-		end
-
-	end
-
-	def check()
-
-		version = Nokogiri::HTML(open(@url)).xpath('//div[@id="breadcrumb"]/a[3]').text
-
-		return version
-
-	end
-
+    version
+  end
 end
-

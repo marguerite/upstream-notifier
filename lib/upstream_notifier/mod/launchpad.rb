@@ -1,107 +1,94 @@
 class Launchpad
+  require 'rubygems'
+  require 'nokogiri'
+  require 'open-uri'
+  require 'date'
 
-	require 'rubygems'
-	require 'nokogiri'
-	require 'open-uri'
-	require 'date'
+  def initialize(url = '', version = '')
+    @url = if url.index('launchpad.net')
 
-	def initialize(url="",version="")
+             url
 
-		if url.index("launchpad.net")
+           else
 
-			@url = url
+             'https://launchpad.net/' + url
 
-		else
+           end
 
-			@url = "https://launchpad.net/" + url
+    @version = version
+  end
 
-		end
+  def check
+    release = lastRelease
+    commit = lastCommit
+    rd = releaseDate
+    now = Time.now.strftime('%Y%m').to_i
 
-		@version = version
+    if @version == 'nil' || @version.empty?
+      if release
+        return release
+      else
+        return commit
+            end
+    elsif @version.index('+')
 
-	end
+      return commit
 
-	def check()
+    else
 
-		release = lastRelease()
-		commit = lastCommit()
-		rd = releaseDate()
-		now = Time.now.strftime("%Y%m").to_i 
+      if (now - rd) > MONTH_NO_UPDATE
 
-                if ( @version == "nil" || @version.empty? )
-                        if release
-                                return release
-                        else
-                                return commit
-                        end
-                elsif @version.index("+")
+        return commit
 
-                        return commit
+      else
 
-                else
+        return release
 
-                        if ( now - rd ) > MONTH_NO_UPDATE
+            end
 
-                                return commit
+    end
+  end
 
-                        else
+  def lastRelease
+    release = Nokogiri::HTML(open(@url)).xpath('//div[@id="side-portlets"]/div[@id="downloads"]/div[@class="version"]').text.strip!.split(/\s/)[3]
 
-                                return release
+    release
+  end
 
-                        end
+  def releaseDate
+    dstring = Nokogiri::HTML(open(@url)).xpath('//div[@id="side-portlets"]/div[@id="downloads"]/div[@class="released"]').text.strip!.split(/\s/)[2]
 
-                end
+    darray = dstring.split('-')
 
-	end
+    date = darray[0] + darray[1] + darray[2]
 
-	def lastRelease()
+    date
+  end
 
-		release = Nokogiri::HTML(open(@url)).xpath('//div[@id="side-portlets"]/div[@id="downloads"]/div[@class="version"]').text.strip!.split(/\s/)[3]
+  def lastCommit
+    bzr_repo = Nokogiri::HTML(open(@url)).xpath('//dl[@id="dev-focus"]/dd/p[2]/a[2]/@href').first.value
 
-		return release
+    bzr_commit = Nokogiri::HTML(open(bzr_repo)).xpath('//div[@id="breadcrumbs"]/span').text.split(/\s/)[5].delete(')')
 
-	end
+    dstring = Nokogiri::HTML(open(bzr_repo)).xpath('//div[@id="infTxt"]/ul/li[@class="timer"]/span').text.split(/\s/)[0]
 
-	def releaseDate()
+    darray = dstring.split('-')
 
-		dstring = Nokogiri::HTML(open(@url)).xpath('//div[@id="side-portlets"]/div[@id="downloads"]/div[@class="released"]').text.strip!.split(/\s/)[2]
+    commit_date = darray[0] + darray[1] + darray[2]
 
-		darray = dstring.split('-')
+    prefix = if @version == 'nil' || @version.empty?
 
-		date = darray[0] + darray[1] + darray[2]
+               '0.0.0'
 
-		return date
+             else
 
-	end
+               # 1.0+bzr, 1.0.0
+               @version.gsub(/\+.*$/, '')
 
-	def lastCommit()
+             end
 
-		bzr_repo = Nokogiri::HTML(open(@url)).xpath('//dl[@id="dev-focus"]/dd/p[2]/a[2]/@href').first.value
+    version = prefix + '+bzr' + commit_date + '.' + bzr_commit
 
-		bzr_commit = Nokogiri::HTML(open(bzr_repo)).xpath('//div[@id="breadcrumbs"]/span').text.split(/\s/)[5].gsub(')','')
-
-		dstring = Nokogiri::HTML(open(bzr_repo)).xpath('//div[@id="infTxt"]/ul/li[@class="timer"]/span').text.split(/\s/)[0]
-
-		darray = dstring.split('-')
-
-		commit_date = darray[0] + darray[1] + darray[2]
-
-		if @version == "nil" || @version.empty?
-
-			prefix = "0.0.0"
-
-		else
-
-			# 1.0+bzr, 1.0.0
-			prefix = @version.gsub(/\+.*$/,'')
-
-		end
-
-		version = prefix + "+bzr" + commit_date + "." + bzr_commit
-
-		return version
-
-	end
-
+    version
+  end
 end
-

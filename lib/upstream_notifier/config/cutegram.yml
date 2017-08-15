@@ -1,13 +1,13 @@
 ---
 libqtelegram-ae:
   version: v6.1-stable
-  plug: github
+  plugin: github
   url: https://github.com/Aseman-Land/libqtelegram-aseman-edition
 libtelegramqml:
   version: v0.9.2
-  plug: github
+  plugin: github
   url: https://github.com/Aseman-Land/TelegramQML
 cutegram:
   version: v2.7.1-stable
-  plug: github
+  plugin: github
   url: https://github.com/Aseman-Land/Cutegram

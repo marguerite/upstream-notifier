@@ -1,108 +1,96 @@
 class Cgit
+  # You can not skip the '.git' in the cgit URL
 
-	# You can not skip the '.git' in the cgit URL
+  require 'nokogiri'
+  require 'open-uri'
 
-	require 'nokogiri'
-	require 'open-uri'
+  MONTH_NO_UPDATE = 6
 
-	MONTH_NO_UPDATE = 6
+  def initialize(url = '', version = '')
+    @url = url
 
-	def initialize(url="",version="")
+    @version = version
+  end
 
-		@url = url
+  def check
+    if @version == 'nil'
 
-		@version = version
+      if lastRelease.empty?
 
-	end
+        lastCommit
 
-	def check()
+      else
 
-		if @version == "nil"
+        lastRelease[0]
 
-			unless lastRelease().empty?
+      end
 
-				return lastRelease()[0]
+    else
 
-			else
-				
-				return lastCommit()
+      if lastRelease.empty? || lastRelease[0] == @version
 
-			end
+        # If upstream has no new release last MONTH_NO_UPDATE months,
+        # git version will be used
 
-		else
+        tstring = lastRelease[1]
 
-			if ( lastRelease().empty? || lastRelease[0] == @version )	
+        # "8 months" "3 years"
+        tarray = tstring.split(/\s/)
 
-				# If upstream has no new release last MONTH_NO_UPDATE months,
-				# git version will be used
+        if tarray[1] == 'years'
 
-				tstring = lastRelease()[1]
+          return lastCommit
 
-				# "8 months" "3 years"
-				tarray = tstring.split(/\s/)
+        elsif tarray[1] == 'months' && tarray[0] > MONTH_NO_UPDATE
 
-				if tarray[1] == "years"
+          return lastCommit
 
-					return lastCommit()
+        else
 
-				elsif ( tarray[1] == "months" && tarray[0] > MONTH_NO_UPDATE )
+          return lastRelease[0]
 
-					return lastCommit()
+        end
 
-				else
+      else
 
-					return lastRelease[0]
+        lastCommit
 
-				end
+      end
 
-			else
+    end
+  end
 
-				return lastCommit()
+  def lastRelease
+    version = Nokogiri::HTML(open(@url)).xpath('//table[contains(@class,"list")]/tr[5]/td[2]/a').text
 
-			end
+    date = Nokogiri::HTML(open(@url)).xpath('//table[contains(@class,"list")]/tr[5]/td[4]').text
 
-		end
+    [version, date]
+  end
 
-	end
+  def lastCommit
+    dstring = Nokogiri::HTML(open(@url + '/log')).xpath('//table[contains(@class,"list")]/tr[2]/td[1]').text
 
-	def lastRelease()
+    darray = dstring.split('-')
 
-		version = Nokogiri::HTML(open(@url)).xpath('//table[contains(@class,"list")]/tr[5]/td[2]/a').text
+    date = darray[0] + darray[1] + darray[2]
 
-		date = Nokogiri::HTML(open(@url)).xpath('//table[contains(@class,"list")]/tr[5]/td[4]').text
+    commit = Nokogiri::HTML(open(@url + '/log')).xpath('//table[contains(@class,"list")]/tr[2]/td[2]/a/@href').first.value
 
-		return version,date
+    shortcommit = commit.gsub(/^.*?id=/, '')[0..6]
 
-	end
+    prefix = if @version == 'nil' || @version.empty?
 
-	def lastCommit()
+               '0.0.0'
 
+             else
 
-		dstring = Nokogiri::HTML(open(@url + "/log")).xpath('//table[contains(@class,"list")]/tr[2]/td[1]').text
+               @version.gsub(/\+git.*$/, '')
 
-		darray = dstring.split("-")
+             end
 
-		date = darray[0] + darray[1] + darray[2]
+    version = prefix + '+git' + date + '.' + shortcommit
 
-		commit = Nokogiri::HTML(open(@url + "/log")).xpath('//table[contains(@class,"list")]/tr[2]/td[2]/a/@href').first.value
-
-		shortcommit = commit.gsub(/^.*?id=/,'')[0..6]
-
-		if ( @version == "nil" || @version.empty? ) then
-
-			prefix = "0.0.0"
-
-		else
-
-			prefix = @version.gsub(/\+git.*$/,'')
-
-		end
-
-		version = prefix + '+git' + date + '.' + shortcommit
-
-		return version
-
-	end
-
+    version
+  end
 end
-
