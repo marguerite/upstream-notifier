@@ -10,15 +10,12 @@ module UpstreamNotifier
       branch, @use_git = args
       branch ||= 'master'
       uri = 'https://github.com/' + uri.sub(%r{http(s)?://github\.com/}, '')
-      @release_xml = if UpstreamNotifier::Ping.new(uri + '/releases', 5000)
-                                              .ping?
-                       Nokogiri::HTML(open(uri + '/releases', 'r:UTF-8'))
-                     end
+      @release_xml = Nokogiri::HTML(open(uri + '/releases', 'r:UTF-8'))
       @commit_xml = Nokogiri::HTML(open(uri + '/commits/' + branch, 'r:UTF-8'))
     end
 
     def get
-      new = if @release_xml.nil?
+      new = if release.nil?
               '0.0.0+git' + commit_date.strftime('%Y%m%d') + '.' + commit
             elsif !@use_git.nil? && (Date.today - release_date).to_i > 180
               # if use_git, git version will be used when the release was made
@@ -31,7 +28,8 @@ module UpstreamNotifier
     end
 
     def release
-      @release_xml.xpath('//span[@class="tag-name"]').first.text
+      page = @release_xml.xpath('//span[@class="tag-name"]')
+      page.empty? ? nil : page.first.text
     end
 
     def release_date
