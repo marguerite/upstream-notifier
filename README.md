@@ -1,6 +1,8 @@
 Upstream Notifier
 
-======
+------
+
+[![Code Climate](https://codeclimate.com/github/marguerite/upstream-notifier/badges/gpa.svg)](https://codeclimate.com/github/marguerite/upstream-notifier)
 
 upstream notifier is a monitoring server for packagers, usually running on a Rapsberry Pi.
 
@@ -38,9 +40,9 @@ You can reuse any plugin that presents, example see our fcitx plugin which reuse
 # Available Plugins
 
 * github
-* sourceforge: still needs polishing for some specfial exceptions
+* sourceforge
 * cgit: used for those projects hosting on git.savannah.(non)gnu.org or other scm services powered by cgit like git.kernel.org
-* googlecode
+* googlecode: needed rewriting with phantomjs and watir gem
 * launchpad
 * cpan
 * pypi
