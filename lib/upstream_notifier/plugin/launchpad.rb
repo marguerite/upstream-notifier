@@ -36,7 +36,8 @@ module UpstreamNotifier
         commitdate = Date.parse(commitdate)
         [commit, commitdate, 'bzr']
       else
-        require './cgit.rb'
+        path = File.expand_path(File.dirname(__FILE__))
+        require path + '/cgit.rb'
         res = UpstreamNotifier::Cgit.new(uri, @old).commit
         res << 'git'
       end
