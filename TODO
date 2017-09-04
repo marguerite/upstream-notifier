@@ -1,9 +1,5 @@
 * bitbucket.rb
-* npmjs.rb
 * golangorg.rb
 * nodejs.rb
-
-* [FIXME] something wrong with fcitx mod
-
 * use translation in mail/irc class
 * also fetch some changelogs (if any)

@@ -21,7 +21,7 @@ It will sends you email / shout on IRC about new upstream releases.
 ---
 fcitx:
   version: 4.2.8.1
-  plug: github
+  plugin: github
   url: https://github.com/fcitx/fcitx
 </pre>
 
@@ -47,8 +47,6 @@ You can reuse any plugin that presents, example see our fcitx plugin which reuse
 * cpan
 * pypi
 * rubygems
-* npmjs
+* npm
 * nodejs
 * golangorg
-
-***Rewriting...please wait***
