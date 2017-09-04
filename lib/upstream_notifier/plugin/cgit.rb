@@ -19,8 +19,6 @@ module UpstreamNotifier
       end
     end
 
-    private
-
     def release
       xml = Nokogiri::HTML(open(@uri + '/refs', 'r:UTF-8'))
       # the next tr of the 3rd tr with class "nohover" constains the latest release
@@ -44,7 +42,12 @@ module UpstreamNotifier
     def commit
       xml = Nokogiri::HTML(open(@uri + '/log'))
       latest = xml.xpath('//table[contains(@class, "list")]/tr[2]')
-      commit_date = Date.parse(latest.children[0].text)
+      if latest.children[0].text =~ /[a-z]/
+        #FIXME
+        commit_date = Date.today
+      else
+        commit_date = Date.parse(latest.children[0].text)
+      end
       commit = latest.children[1].children[0].attr('href').sub!(/.*id=(.*)/, '\1')[0..6]
       [commit, commit_date]
     end
