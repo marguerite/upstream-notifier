@@ -1,5 +1,0 @@
----
-fcitx:
-  version: 4.2.9
-  plugin: github
-  url: fcitx/fcitx

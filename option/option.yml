@@ -1,5 +1,4 @@
 ---
-notification: irc
 email:
   server: 'smtp.gmail.com'
   port: 587

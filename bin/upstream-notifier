@@ -1,0 +1,47 @@
+#!/usr/bin/env ruby
+
+$LOAD_PATH.push(File.expand_path(File.dirname(__FILE__) + '/../lib'))
+
+require 'upstream_notifier'
+require 'optparse'
+
+options = {}
+
+OptionParser.new do |opts|
+  opts.banner = 'Usage: upstream_notifier -c <config> -o <option>'
+  opts.separator 'Notify upstream updates by mail or IRC.'
+  opts.separator 'Specific Options:'
+
+  opts.on('-c <config>', 'Specify the configuration yml') do |config|
+    options['config'] = config
+  end
+
+  opts.on('-o <option>', 'Specify the option yml') do |option|
+    options['options'] = UpstreamNotifier::Config.new(option).config if option
+  end
+
+  opts.separator ''
+  opts.separator 'Common Options:'
+  opts.on_tail('-h', '--help', 'Show this message') do
+    puts opts
+    exit
+  end
+
+  opts.on_tail('--version', 'Show version') do
+    puts UpstreamNotifier::Version
+    exit
+  end
+end.parse!(ARGV)
+
+options['options'] ||= UpstreamNotifier::OPTIONS
+
+if options['config']
+  c = UpstreamNotifier::Config.new(options['config'])
+  UpstreamNotifier::Parser.new(c, options['options']).parse
+else
+  Dir.glob(UpstreamNotifier::CONFIGPATH + '/*.yml')
+     .each do |i|
+       c = UpstreamNotifier::Config.new(i)
+       UpstreamNotifier::Parser.new(c, options['options']).parse
+     end
+end

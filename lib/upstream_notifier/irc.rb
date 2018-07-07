@@ -12,16 +12,16 @@ module UpstreamNotifier
       @socket.puts("PRIVMSG ##{@option['channel']} :#{msg}\n")
     end
 
-    private 
+    private
 
     def login
       @socket.puts("NICK #{@option['user']}\n")
-      @socket.puts("USER #{(@option['user']+" ")*3} :#{@option['user']}\n")
+      @socket.puts("USER #{(@option['user'] + ' ') * 3} :#{@option['user']}\n")
       while line = @socket.gets.chomp!
-	if line.split(" ")[1] == "376"
+        if line.split(' ')[1] == '376'
           @socket.puts("JOIN ##{@option['channel']}\n")
-	  break
-	end
+          break
+        end
       end
     end
 

@@ -1,0 +1,9 @@
+---
+fcitx:
+  version: 4.2.9.2
+  plugin: github
+  url: fcitx/fcitx
+  branch: master
+  git: true
+  notifier: irc
+  maintainer: marguerite

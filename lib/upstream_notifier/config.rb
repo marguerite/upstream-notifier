@@ -3,18 +3,16 @@ require 'yaml'
 module UpstreamNotifier
   # handle yaml config
   class Config
-    def initialize(config, path = 'config')
-      @config_uri = File.expand_path(File.dirname(__FILE__) +
-                                     "/#{path}/#{config}.yml")
-      @config = YAML.safe_load(open(@config_uri, 'r:UTF-8').read)
+    def initialize(uri)
+      @uri = uri
+      @config = YAML.safe_load(open(@uri, 'r:UTF-8').read)
     end
 
-    def parse
-      @config
-    end
+    attr_reader :uri, :config
 
-    def write(config)
-      open(@config_uri, 'w:UTF-8').write(config.to_yaml)
+    def config=(hash)
+      open(@uri, 'w:UTF-8').write(hash.to_hash)
+      @config = hash
     end
   end
 end

@@ -4,7 +4,7 @@ module UpstreamNotifier
   class Email
     def initialize(option, *args)
       @option = option[self.class.to_s.split('::')[1].downcase!]
-      @name, @version = args
+      @name, @version, @maintainer = args
     end
 
     def get
@@ -29,7 +29,7 @@ MESSAGE_END
       smtp = Net::SMTP.new @option['server'], @option['port']
       smtp.enable_starttls
       smtp.start('gmail.com', @option['from'], @option['password'], :login) do
-        smtp.send_message(message, @option['from'], @option['to'])
+        smtp.send_message(message, @option['from'], @maintainer)
       end
     end
   end
