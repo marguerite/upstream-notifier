@@ -2,16 +2,24 @@
 doubanfm-qt5:
   version: 2.1.0
   plugin: github
-  url: https://github.com/zonyitoo/doubanfm-qt
+  url: zonyitoo/doubanfm-qt
+  notifier: email
+  maintainer: example@example.com
 WeCase:
   version: 0.0.6
   plugin: github
-  url: https://github.com/WeCase/WeCase
+  url: WeCase/WeCase
+  notifier: email
+  maintainer: example@example.com
 python3-rpweibo:
   version: 0.02.2
   plugin: github
-  url: https://github.com/WeCase/rpweibo
+  url: WeCase/rpweibo
+  notifier: email
+  maintainer: example@example.com
 python3-notify2:
   version: '0.3'
   plugin: pypi
   url: notify2
+  notifier: email
+  maintainer: example@example.com

@@ -11,7 +11,7 @@ module UpstreamNotifier
     attr_reader :uri, :config
 
     def config=(hash)
-      open(@uri, 'w:UTF-8').write(hash.to_hash)
+      open(@uri, 'w:UTF-8').write(hash.to_yaml)
       @config = hash
     end
   end

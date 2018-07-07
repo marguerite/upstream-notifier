@@ -2,7 +2,12 @@
 golang-github-russross-blackfriday:
   version: v1.4
   plugin: github
-  url: https://github.com/russross/blackfriday
+  url: russross/blackfriday
+  notifier: email
+  maintainer: example@example.com
+golang-github-cpuguy83-go-md2man:
   version: v1.0.5
   plugin: github
-  url: https://github.com/cpuguy83/go-md2man
+  url: cpuguy83/go-md2man
+  notifier: email
+  maintainer: example@example.com

@@ -26,15 +26,15 @@ module UpstreamNotifier
       # open 50 threads for each config file
       q = Queue.new
       @config.config.each { |k, v| q.push([k, v]) }
-      workers = establish_workers
+      workers = establish_workers(q, 4)
       workers.map(&:join)
     end
 
-    def establish_workers
-      (0...50).map do
+    def establish_workers(queue, max)
+      (0...max).map do
         Thread.new do
           begin
-            while x = q.pop(true)
+            while x = queue.pop(true)
               @packages << UpstreamNotifier::Package.new(x[0], x[1],
                                                          @config.uri)
             end

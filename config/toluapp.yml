@@ -2,4 +2,6 @@
 lua51-toluapp:
   version: 1.0.93
   plugin: github
-  url: https://github.com/LuaDist/toluapp
+  url: LuaDist/toluapp
+  notifier: email
+  maintainer: example@example.com

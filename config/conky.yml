@@ -2,4 +2,6 @@
 conky:
   version: 1.10.1
   plugin: github
-  url: https://github.com/brndnmtthws/conky
+  url: brndnmtthws/conky
+  notifier: email
+  maintainer: example@example.com

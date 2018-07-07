@@ -2,12 +2,18 @@
 libqtelegram-ae:
   version: v6.1-stable
   plugin: github
-  url: https://github.com/Aseman-Land/libqtelegram-aseman-edition
+  url: Aseman-Land/libqtelegram-aseman-edition
+  notifier: email
+  maintainer: example@example.com
 libtelegramqml:
   version: v0.9.2
   plugin: github
-  url: https://github.com/Aseman-Land/TelegramQML
+  url: Aseman-Land/TelegramQML
+  notifier: email
+  maintainer: example@example.com
 cutegram:
   version: v2.7.1-stable
   plugin: github
-  url: https://github.com/Aseman-Land/Cutegram
+  url: Aseman-Land/Cutegram
+  notifier: email
+  maintainer: example@example.com

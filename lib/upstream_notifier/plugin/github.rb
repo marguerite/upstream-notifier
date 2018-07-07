@@ -1,5 +1,5 @@
 require 'nokogiri'
-require 'node_semver'
+#require 'node_semver'
 require 'open-uri'
 require 'date'
 

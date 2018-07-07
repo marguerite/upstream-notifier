@@ -2,4 +2,6 @@
 vokoscreen:
   version: 2.4.11-beta
   plugin: github
-  url: https://github.com/vkohaupt/vokoscreen
+  url: vkohaupt/vokoscreen
+  notifier: email
+  maintainer: example@example.com

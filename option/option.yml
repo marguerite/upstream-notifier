@@ -4,7 +4,6 @@ email:
   port: 587
   from: 'example@example.com'
   password: ''
-  to: 'example@example.com'
 irc:
   server: 'weber.freenode.net'
   port: 8001

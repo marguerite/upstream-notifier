@@ -2,4 +2,6 @@
 shadowsocks-go:
   version: 1.1.4
   plugin: github
-  url: https://github.com/shadowsocks/shadowsocks-go
+  url: shadowsocks/shadowsocks-go
+  notifier: email
+  maintainer: example@example.com
