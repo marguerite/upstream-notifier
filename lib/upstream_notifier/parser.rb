@@ -6,6 +6,7 @@ module UpstreamNotifier
     end
 
     def parse
+      bot = UpstreamNotifier::IRCBot.new(@option) if @option['notification'] == 'irc'
       @config.each do |k, v|
         splat = [v['url'], v['version']]
         splat += v.reject { |m, _n| %w[plugin url version].include?(m) }
@@ -14,8 +15,9 @@ module UpstreamNotifier
         next unless @config[k]['version'] != new
         @config[k]['version'] = new
         UpstreamNotifier::Logger.write(Time.now, k, new)
-        UpstreamNotifier::Plugin.send(@option['notification'], 'notifier', @option, k, new) 
+        UpstreamNotifier::Plugin.send(@option['notification'], 'notifier', @option, k, new, bot) 
       end
+      bot.send(:quit) if @option['notification'] == 'irc'
       @config
     end
   end

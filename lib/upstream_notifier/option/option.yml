@@ -1,13 +1,13 @@
 ---
-notification: email
+notification: irc
 email:
   server: 'smtp.gmail.com'
   port: 587
-  from: 'username@gmail.com'
-  password: 'password'
-  to: 'username@example.com'
-irc:
-  server: ''
-  channel: ''
-  user: ''
+  from: 'example@example.com'
   password: ''
+  to: 'example@example.com'
+irc:
+  server: 'weber.freenode.net'
+  port: 8001
+  channel: 'opensuse-cn'
+  user: 'UpstreamNotifier'
