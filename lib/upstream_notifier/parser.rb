@@ -35,8 +35,7 @@ module UpstreamNotifier
         Thread.new do
           begin
             while x = queue.pop(true)
-              @packages << UpstreamNotifier::Package.new(x[0], x[1],
-                                                         @config.uri)
+              @packages << UpstreamNotifier::Package.new(x[0], x[1])
             end
           rescue ThreadError
           end

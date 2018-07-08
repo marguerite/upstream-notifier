@@ -35,13 +35,11 @@ end.parse!(ARGV)
 
 options['options'] ||= UpstreamNotifier::OPTIONS
 
-if options['config']
-  c = UpstreamNotifier::Config.new(options['config'])
-  UpstreamNotifier::Parser.new(c, options['options']).parse
-else
-  Dir.glob(UpstreamNotifier::CONFIGPATH + '/*.yml')
-     .each do |i|
-       c = UpstreamNotifier::Config.new(i)
-       UpstreamNotifier::Parser.new(c, options['options']).parse
-     end
-end
+c = if options['config']
+      UpstreamNotifier::Config.new(options['config'])
+    else
+      Dir.glob(UpstreamNotifier::CONFIGPATH + '/*.yml')
+         .map { |i| UpstreamNotifier::Config.new(i) }
+         .inject(&:merge)
+    end
+UpstreamNotifier::Parser.new(c, options['options']).parse

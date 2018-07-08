@@ -1,10 +1,9 @@
 module UpstreamNotifier
   class Package
-    RESERVED = [%w(url version plugin notifier maintainer)].freeze
+    RESERVED = [%w(url version plugin notifier maintainer file)].freeze
 
-    def initialize(name, attr, path)
+    def initialize(name, attr)
       @name = name
-      @path = path
       @attr = attr
       @attr.each do |k, v|
         instance_variable_set("@#{k}", v)
