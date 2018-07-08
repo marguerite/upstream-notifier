@@ -18,35 +18,41 @@ module UpstreamNotifier
       packages = sort_by_notifier
       peers = sort_name_version_peer(packages)
       peers.each do |k, v|
-        UpstreamNotifier::Plugin.send(k.to_sym, option,
-				      v, @id, bot)
+        if k.eql?('all')
+          %i(irc email).each do |i|
+            UpstreamNotifier::Plugin.send(i, option, v,
+                                          @id, bot)
+          end
+        else
+          UpstreamNotifier::Plugin.send(k.to_sym, option,
+                                        v, @id, bot)
+        end
       end
     end
 
     private
 
     def updated
-      @packages.reject {|i| i.oldversion.nil? }
+      @packages.reject { |i| i.oldversion.nil? }
     end
 
     def sort_by_notifier
       notifiers = {}
       @packages.each do |i|
-	if notifiers.keys.include?(i.notifier)
-	  notifiers[i.notifier] << i
-	else
-	  notifiers[i.notifier] = [i]
-	end
+        if notifiers.keys.include?(i.notifier)
+          notifiers[i.notifier] << i
+        else
+          notifiers[i.notifier] = [i]
+        end
       end
       notifiers
     end
 
     def sort_name_version_peer(packages)
-      packages.inject(packages) do |h, (k,v)|
-	hash = {}
-	v.each {|i| hash[i.name] = i.version }
+      packages.each_with_object(packages) do |(k, v), h|
+        hash = {}
+        v.each { |i| hash[i.name] = i.version }
         h[k] = hash
-	h
       end
     end
   end

@@ -13,7 +13,7 @@ It will sends you email / shout on IRC about new upstream releases.
 * supports github, sourceforge.net, code.google.com, launchpad.net
   and many more
 * easy extendable with a plugin system
-* supports email and IRC (TODO)
+* supports email and IRC
 
 # Configuration with YAML
 
@@ -22,7 +22,9 @@ It will sends you email / shout on IRC about new upstream releases.
 fcitx:
   version: 4.2.8.1
   plugin: github
-  url: https://github.com/fcitx/fcitx
+  url: fcitx/fcitx
+  notifier: irc
+  maintainer: marguerite
 </pre>
 
 `plug` can be other services like "github", "sourceforge", "googlecode".
@@ -42,7 +44,7 @@ You can reuse any plugin that presents, example see our fcitx plugin which reuse
 * github
 * sourceforge
 * cgit: used for those projects hosting on git.savannah.(non)gnu.org or other scm services powered by cgit like git.kernel.org
-* googlecode: needed rewriting with phantomjs and watir gem
+* googlecode: needed rewriting with headless chromium
 * launchpad
 * cpan
 * pypi

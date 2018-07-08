@@ -16,7 +16,7 @@ module UpstreamNotifier
       # notify
       @users.each { |i| i.notify(@option, bot) }
       # save work
-      #@config.config = @packages.map(&:to_h).inject(&:merge!)
+      # @config.config = @packages.map(&:to_h).inject(&:merge!)
       # shut the bot down
       bot.send(:quit) if bot_started
     end
@@ -35,19 +35,19 @@ module UpstreamNotifier
       users = []
       @packages.each do |i|
         contacts = i.maintainer.split(',')
-	email = contacts.select {|j| j.index('@') }[0]
-        nick = contacts.reject {|j| j.index('@') }[0]
-	if email.nil?
-	  unless users.map{|j| j.nick}.include?(nick)
-	    users << UpstreamNotifier::User.new(nil, nick)
-	  end
-	  users.select{|j| j.nick.eql?(nick)}[0].add_package(i)
-	else
-	  unless users.map{|j| j.email}.include?(email)
-	    users << UpstreamNotifier::User.new(email, nil)
-	  end
-	  users.select{|j| j.email.eql?(email)}[0].add_package(i)
-	end
+        email = contacts.select { |j| j.index('@') }[0]
+        nick = contacts.reject { |j| j.index('@') }[0]
+        if email.nil?
+          unless users.map(&:nick).include?(nick)
+            users << UpstreamNotifier::User.new(nil, nick)
+          end
+          users.select { |j| j.nick.eql?(nick) }[0].add_package(i)
+        else
+          unless users.map(&:email).include?(email)
+            users << UpstreamNotifier::User.new(email, nil)
+          end
+          users.select { |j| j.email.eql?(email) }[0].add_package(i)
+        end
       end
       users
     end
