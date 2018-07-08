@@ -43,7 +43,7 @@ module UpstreamNotifier
     end
 
     def commit_date
-      Date.parse(@commit_xml.xpath('//div[contains(@class, "commit-author-section")]/relative-time').first.values[0])
+      Date.parse(@commit_xml.xpath('//div[contains(@class, "commit-author-section")]/div/relative-time').first.values[0])
     end
   end
 end

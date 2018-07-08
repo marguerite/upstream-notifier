@@ -9,20 +9,16 @@ module UpstreamNotifier
         instance_variable_set("@#{k}", v)
         singleton_class.class_eval { attr_reader k.to_s }
       end
+      @oldversion = nil
       update
     end
+
+    attr_reader :name, :oldversion
 
     def to_h
       return {} unless @oldversion
       @attr['version'] = @version
       { @name => @attr }
-    end
-
-    def notify(option, bot)
-      return unless @oldversion
-      UpstreamNotifier::Plugin.send(@notifier.to_sym, option,
-                                    @name, @version,
-                                    @maintainer, bot)
     end
 
     private

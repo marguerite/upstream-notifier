@@ -10,12 +10,13 @@ module UpstreamNotifier
 
     def parse
       parse_packages
+      @users = parse_users
       # init IRC bot
       bot, bot_started = bot_init
       # notify
-      @packages.each { |i| i.notify(@option, bot) }
+      @users.each { |i| i.notify(@option, bot) }
       # save work
-      @config.config = @packages.map(&:to_h).inject(&:merge!)
+      #@config.config = @packages.map(&:to_h).inject(&:merge!)
       # shut the bot down
       bot.send(:quit) if bot_started
     end
@@ -28,6 +29,27 @@ module UpstreamNotifier
       @config.config.each { |k, v| q.push([k, v]) }
       workers = establish_workers(q, 4)
       workers.map(&:join)
+    end
+
+    def parse_users
+      users = []
+      @packages.each do |i|
+        contacts = i.maintainer.split(',')
+	email = contacts.select {|j| j.index('@') }[0]
+        nick = contacts.reject {|j| j.index('@') }[0]
+	if email.nil?
+	  unless users.map{|j| j.nick}.include?(nick)
+	    users << UpstreamNotifier::User.new(nil, nick)
+	  end
+	  users.select{|j| j.nick.eql?(nick)}[0].add_package(i)
+	else
+	  unless users.map{|j| j.email}.include?(email)
+	    users << UpstreamNotifier::User.new(email, nil)
+	  end
+	  users.select{|j| j.email.eql?(email)}[0].add_package(i)
+	end
+      end
+      users
     end
 
     def establish_workers(queue, max)
