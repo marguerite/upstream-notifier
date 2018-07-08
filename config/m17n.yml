@@ -1,0 +1,252 @@
+---
+libzhuyin:
+  version: 1.1.1
+  plugin: github
+  url: libzhuyin/libzhuyin
+  notifier: all
+  maintainer: example@example.com,example
+ibus-libzhuyin:
+  version: 1.8.0
+  plugin: github
+  url: libzhuyin/ibus-libzhuyin
+  notifier: all
+  maintainer: example@example.com,example
+brise:
+  version: 0.36+git20160221.7dbd56b
+  plugin: github
+  url: lotem/brise
+  maintainer: example@example.com,example
+librime:
+  version: 1.2.9+git20160226.df4192c
+  plugin: github
+  url: rime/librime
+  notifier: all
+  maintainer: example@example.com,example
+ibus-rime:
+  version: 1.2
+  plugin: github
+  url: lotem/ibus-rime
+  notifier: all
+  maintainer: example@example.com,example
+sunpinyin:
+  version: 2.0.99
+  plugin: github
+  url: sunpinyin/sunpinyin
+  notifier: all
+  maintainer: example@example.com,example
+googletest:
+  version: 1.8.0
+  plugin: github
+  url: google/googletest
+  notifier: all
+  maintainer: i@marguerite.su, marguerite
+presage:
+  version: 0.9.1
+  plugin: sourceforge
+  url: http://presage.sourceforge.net
+  notifier: all
+  maintainer: example@example.com,example
+opencc:
+  version: ver.1.0.5
+  plugin: github
+  url: https://github.com/BYVoid/OpenCC
+  notifier: all
+  maintainer: example@example.com,example
+libhangul:
+  version: 0.1.0+git20150224.78e9d89
+  plugin: github
+  url: choehwanjin/libhangul
+  notifier: all
+  maintainer: example@example.com,example
+imhangul:
+  version: 3.1.1+git20130112.a4c2796
+  plugin: github
+  url: choehwanjin/imhangul
+  notifier: all
+  maintainer: example@example.com,example
+libpinyin:
+  version: 2.2.0
+  plugin: github
+  url: libpinyin/libpinyin
+  notifier: all
+  maintainer: example@example.com,example
+ibus-libpinyin:
+  version: 1.10.0
+  plugin: github
+  url: libpinyin/ibus-libpinyin
+  notifier: all
+  maintainer: example@example.com,example
+libchewing:
+  version: 0.5.1+git20171114.3df07c9
+  plugin: github
+  url: chewing/libchewing
+  notifier: all
+  maintainer: example@example.com,example
+libkkc:
+  version: 0.3.5+git20171220.7d365e1
+  plugin: github
+  url: ueno/libkkc
+  notifier: all
+  maintainer: example@example.com,example
+libskk:
+  version: 1.2.0+git20171110+1.0.3
+  plugin: github
+  url: ueno/libskk
+  notifier: all
+  maintainer: example@example.com,example
+ibus-skk:
+  version: 1.4.2
+  plugin: github
+  url: ueno/ibus-skk
+  notifier: all
+  maintainer: example@example.com,example
+gnugo:
+  version: rel-3-9-1+git20130613.84a32e9
+  plugin: cgit
+  url: http://git.savannah.gnu.org/cgit/gnugo.git
+  notifier: all
+  maintainer: example@example.com,example
+rubygem-qtbindings:
+  version: 4.8.6.2
+  plugin: rubygems
+  url: qtbindings
+  notifier: all
+  maintainer: example@example.com,example
+perl-Devel-Cover:
+  version: '1.20'
+  plugin: cpan
+  url: Devel::Cover
+  notifier: all
+  maintainer: example@example.com,example
+python-faulthandler:
+  version: '2.4'
+  plugin: pypi
+  url: faulthandler
+  notifier: all
+  maintainer: example@example.com,example
+python-leveldb:
+  version: '0.193'
+  plugin: pypi
+  url: leveldb
+  notifier: all
+  maintainer: example@example.com,example
+yaml-cpp:
+  version: 0.6.1
+  plugin: github
+  url: jbeder/yaml-cpp
+  notifier: all
+  maintainer: example@example.com,example
+uim:
+  version: 1.8.8
+  plugin: github
+  url: uim/uim
+  notifier: all
+  maintainer: example@example.com,example
+canna:
+  version: 3.7p3
+  plugin: necjp
+  url: http://www.nec.co.jp/canna
+  notifier: all
+  maintainer: example@example.com,example
+m17n-lib:
+  version: REL-1-7-0
+  plugin: cgit
+  url: http://git.savannah.gnu.org/cgit/m17n/m17n-lib.git
+  notifier: all
+  maintainer: example@example.com,example
+m17n-db:
+  version: REL-1-7-0
+  plugin: cgit
+  url: http://git.savannah.gnu.org/cgit/m17n/m17n-db.git
+  notifier: all
+  maintainer: example@example.com,example
+anthy:
+  version: 9100h
+  plugin: osdnjp
+  url: https://osdn.jp/projects/anthy/
+  notifier: all
+  maintainer: example@example.com,example
+scws:
+  version: 1.2.3
+  plugin: github
+  url: hightman/scws
+  notifier: all
+  maintainer: example@example.com,example
+marisa:
+  version: 0.2.4
+  plugin: github
+  url: s-yata/marisa-trie
+  notifier: all
+  maintainer: example@example.com,example
+mozc:
+  version: 2.18.2612.102
+  plugin: github
+  url: google/mozc
+  notifier: all
+  maintainer: example@example.com,example
+kimtoy:
+  version: 1.10.1
+  plugin: kde-apps
+  url: http://kde-apps.org/content/show.php/KIMToy?content=140967
+  notifier: all
+  maintainer: example@example.com,example
+kyotocabinet:
+  version: 1.2.76
+  plugin: fallabs
+  url: http://fallabs.com/kyotocabinet/pkg/
+  notifier: all
+  maintainer: example@example.com,example
+libcangjie:
+  version: 1.3
+  plugin: github
+  url: Cangjians/libcangjie
+  notifier: all
+  maintainer: example@example.com,example
+libgooglepinyin:
+  version: 0.1.2
+  plugin: googlecode
+  url: libgooglepinyin
+  notifier: all
+  maintainer: example@example.com,example
+fwnn:
+  version: 1.1.1a023
+  plugin: sourceforgejp
+  url: http://freewnn.sourceforge.jp
+  notifier: all
+  maintainer: example@example.com,example
+gcin:
+  version: 2.8.6
+  plugin: gcin
+  url: http://hyperrate.com/gcin-source/
+  notifier: all
+  maintainer: example@example.com,example
+google-glog:
+  version: 0.3.5
+  plugin: github
+  url: google/glog
+  notifier: all
+  maintainer: example@example.com,example
+fbterm:
+  version: 1.7
+  plugin: googlecode
+  url: fbterm
+  notifier: all
+  maintainer: example@example.com,example
+emacs-apel:
+  version: 10.8
+  plugin: chise.org
+  url: http://git.chise.org/elisp/dist/apel
+  notifier: all
+  maintainer: example@example.com,example
+cmuclmtk:
+  version: 0.7
+  plugin: sourceforge
+  url: cmusphinx
+  notifier: all
+  maintainer: example@example.com,example
+ddskk:
+  version: 20160304
+  plugin: github
+  url: skk-dev/ddskk
+  notifier: all
+  maintainer: example@example.com,example

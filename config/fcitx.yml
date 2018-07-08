@@ -1,9 +1,135 @@
 ---
 fcitx:
-  version: 4.2.9.2
+  version: 4.2.9.6
   plugin: github
   url: fcitx/fcitx
   branch: master
   git: true
-  notifier: irc
-  maintainer: marguerite
+  notifier: all
+  maintainer: example@example.com,example
+fcitx-anthy:
+  version: 0.2.3
+  plugin: github
+  url: fcitx/fcitx-anthy
+  notifier: all
+  maintainer: example@example.com,example
+fcitx-chewing:
+  version: 0.2.3
+  plugin: github
+  url: fcitx/fcitx-chewing
+  notifier: all
+  maintainer: example@example.com,example
+fcitx-cloudpinyin:
+  version: 0.3.6
+  plugin: github
+  url: fcitx/fcitx-cloudpinyin
+  notifier: all
+  maintainer: example@example.com,example
+fcitx-configtool:
+  version: 0.4.10
+  plugin: github
+  url: fcitx/fcitx-configtool
+  notifier: all
+  maintainer: example@example.com,example
+fcitx-fbterm:
+  version: 0.2.0
+  plugin: github
+  url: fcitx/fcitx-fbterm
+  notifier: all
+  maintainer: example@example.com,example
+fcitx-googlepinyin:
+  version: 0.1.6
+  plugin: github
+  url: fcitx/fcitx-googlepinyin
+  notifier: all
+  maintainer: example@example.com,example
+fcitx-hangul:
+  version: 0.3.1
+  plugin: github
+  url: fcitx/fcitx-hangul
+  notifier: all
+  maintainer: example@example.com,example
+fcitx-kkc:
+  version: 0.1.4
+  plugin: github
+  url: fcitx/fcitx-kkc
+  notifier: all
+  maintainer: example@example.com,example
+fcitx-libpinyin:
+  version: 0.5.3
+  plugin: github
+  url: fcitx/fcitx-libpinyin
+  notifier: all
+  maintainer: example@example.com,example
+fcitx-m17n:
+  version: 0.2.4
+  plugin: github
+  url: fcitx/fcitx-m17n
+  notifier: all
+  maintainer: example@example.com,example
+fcitx-qt5:
+  version: 1.2.2
+  plugin: github
+  url: fcitx/fcitx-qt5
+  notifier: all
+  maintainer: example@example.com,example
+fcitx-rime:
+  version: 0.3.2
+  plugin: github
+  url: fcitx/fcitx-rime
+  notifier: all
+  maintainer: example@example.com,example
+fcitx-sayura:
+  version: 0.1.2
+  plugin: github
+  url: fcitx/fcitx-sayura
+  notifier: all
+  maintainer: example@example.com,example
+fcitx-skk:
+  version: 0.1.4
+  plugin: github
+  url: fcitx/fcitx-skk
+  notifier: all
+  maintainer: example@example.com,example
+fcitx-sunpinyin:
+  version: 0.4.2
+  plugin: github
+  url: fcitx/fcitx-sunpinyin
+  notifier: all
+  maintainer: example@example.com,example
+fcitx-table-extra:
+  version: 0.3.8
+  plugin: github
+  url: fcitx/fcitx-table-extra
+  notifier: all
+  maintainer: example@example.com,example
+fcitx-table-other:
+  version: 0.2.4
+  plugin: github
+  url: fcitx/fcitx-table-other
+  notifier: all
+  maintainer: example@example.com,example
+fcitx-ui-light:
+  version: 0.1.3
+  plugin: github
+  url: fcitx/fcitx-ui-light
+  notifier: all
+  maintainer: example@example.com,example
+fcitx-unikey:
+  version: 0.2.7
+  plugin: github
+  url: fcitx/fcitx-unikey
+  notifier: all
+  maintainer: example@example.com,example
+fcitx-zhuyin:
+  version: 0.1.0+git20150626.36064e1
+  plugin: github
+  url: fcitx/fcitx-zhuyin
+  notifier: all
+  maintainer: example@example.com,example
+kcm-fcitx:
+  version: 0.5.5
+  plugin: github
+  url: fcitx/kcm-fcitx
+  notifier: all
+  maintainer: example@example.com,example
