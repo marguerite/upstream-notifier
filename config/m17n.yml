@@ -142,12 +142,6 @@ uim:
   url: uim/uim
   notifier: all
   maintainer: example@example.com,example
-canna:
-  version: 3.7p3
-  plugin: necjp
-  url: http://www.nec.co.jp/canna
-  notifier: all
-  maintainer: example@example.com,example
 m17n-lib:
   version: REL-1-7-0
   plugin: cgit
@@ -158,12 +152,6 @@ m17n-db:
   version: REL-1-7-0
   plugin: cgit
   url: http://git.savannah.gnu.org/cgit/m17n/m17n-db.git
-  notifier: all
-  maintainer: example@example.com,example
-anthy:
-  version: 9100h
-  plugin: osdnjp
-  url: https://osdn.jp/projects/anthy/
   notifier: all
   maintainer: example@example.com,example
 scws:
@@ -186,13 +174,13 @@ mozc:
   maintainer: example@example.com,example
 kimtoy:
   version: 1.10.1
-  plugin: kde-apps
+  plugin: linuxapps
   url: http://kde-apps.org/content/show.php/KIMToy?content=140967
   notifier: all
   maintainer: example@example.com,example
 kyotocabinet:
   version: 1.2.76
-  plugin: fallabs
+  plugin: apache
   url: http://fallabs.com/kyotocabinet/pkg/
   notifier: all
   maintainer: example@example.com,example
@@ -216,7 +204,7 @@ fwnn:
   maintainer: example@example.com,example
 gcin:
   version: 2.8.6
-  plugin: gcin
+  plugin: apache
   url: http://hyperrate.com/gcin-source/
   notifier: all
   maintainer: example@example.com,example
@@ -234,7 +222,7 @@ fbterm:
   maintainer: example@example.com,example
 emacs-apel:
   version: 10.8
-  plugin: chise.org
+  plugin: apache
   url: http://git.chise.org/elisp/dist/apel
   notifier: all
   maintainer: example@example.com,example

@@ -1,13 +1,12 @@
-require 'nokogiri'
-#require 'node_semver'
 require 'open-uri'
+require 'nokogiri'
 require 'date'
 
 module UpstreamNotifier
   class Github
     def initialize(uri, old, *args)
       @old = old
-      branch, @use_git = args
+      branch, @git = args
       branch ||= 'master'
       uri = 'https://github.com/' + uri.sub(%r{http(s)?://github\.com/}, '')
       @release_xml = Nokogiri::HTML(open(uri + '/releases', 'r:UTF-8'))
@@ -15,16 +14,15 @@ module UpstreamNotifier
     end
 
     def get
-      new = if release.nil?
-              '0.0.0+git' + commit_date.strftime('%Y%m%d') + '.' + commit
-            elsif !@use_git.nil? && (Date.today - release_date).to_i > 180
-              # if use_git, git version will be used when the release was made
-              # more than 6 months ago.
-              release + '+git' + commit_date.strftime('%Y%m%d') + '.' + commit
-            else
-              release
-            end
-      # NodeSemver.gte(new, @old) ? new : @old
+      if release.nil?
+        '0.0.0+git' + commit_date.strftime('%Y%m%d') + '.' + commit
+      elsif @git.nil? && (Date.today - release_date).to_i > 180
+        # if use_git, git version will be used when the release was made
+        # more than 6 months ago.
+        release + '+git' + commit_date.strftime('%Y%m%d') + '.' + commit
+      else
+        release
+      end
     end
 
     def release
@@ -43,7 +41,10 @@ module UpstreamNotifier
     end
 
     def commit_date
-      Date.parse(@commit_xml.xpath('//div[contains(@class, "commit-author-section")]/div/relative-time').first.values[0])
+      Date.parse(@commit_xml.xpath('//div[contains(@class, '\
+                                   "'commit-author-section')]"\
+                                   '/div/relative-time')
+                            .first.values[0])
     end
   end
 end
