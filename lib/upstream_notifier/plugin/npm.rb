@@ -3,13 +3,12 @@ require 'open-uri'
 
 module UpstreamNotifier
   class Npm
-    def initialize(uri, old, *_args)
+    def initialize(uri, *_args)
       @uri = if uri =~ %r{http(s)://www.npmjs.com}
                uri
              else
                'https://www.npmjs.com/package/' + uri
              end
-      @old = old
       @xml = Nokogiri::HTML(open(@uri, 'r:UTF-8'))
     end
 

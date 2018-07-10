@@ -44,7 +44,7 @@ You can reuse any plugin that presents, example see our fcitx plugin which reuse
 * github
 * sourceforge
 * cgit: used for those projects hosting on git.savannah.(non)gnu.org or other scm services powered by cgit like git.kernel.org
-* googlecode: needed rewriting with headless chromium
+* googlecode
 * launchpad
 * cpan
 * pypi
@@ -52,3 +52,5 @@ You can reuse any plugin that presents, example see our fcitx plugin which reuse
 * npm
 * nodejs
 * golangorg
+* linuxapps
+* plain apache server

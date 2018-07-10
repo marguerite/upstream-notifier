@@ -4,8 +4,8 @@ require 'date'
 
 module UpstreamNotifier
   class Cgit
-    def initialize(*args)
-      @uri, @old = args
+    def initialize(uri, *args)
+      @uri = uri
     end
 
     def get

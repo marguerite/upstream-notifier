@@ -4,5 +4,4 @@
 * use translation in mail/irc class
 * also fetch some changelogs (if any)
 * let the irc bot response, users can query package latest versions
-* freedesktop
 * gitlab

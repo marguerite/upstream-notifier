@@ -3,7 +3,7 @@ require 'open-uri'
 
 module UpstreamNotifier
   class Cpan
-    def initialize(uri, old, *_args)
+    def initialize(uri, *_args)
       name = if uri =~ %r{http(s)://metacpan.org}
                uri.sub(/.*\//, '')
              elsif uri.index('::')
@@ -12,7 +12,6 @@ module UpstreamNotifier
                uri
              end
       @uri = 'https://metacpan.org/release/' + name
-      @old = old
       @xml = Nokogiri::HTML(open(@uri, 'r:UTF-8'))
     end
 

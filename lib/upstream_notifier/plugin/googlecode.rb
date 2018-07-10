@@ -4,9 +4,8 @@ require 'date'
 
 module UpstreamNotifier
   class Googlecode
-    def initialize(url, version, *args)
-      @name = url.gsub(%r{http(s)?://code\.google\.com/(archive/)?p/}, '')
-      @version = version
+    def initialize(uri, *args)
+      @name = uri.gsub(%r{http(s)?://code\.google\.com/(archive/)?p/}, '')
       @hg = args[0]
     end
 

@@ -24,7 +24,7 @@ module UpstreamNotifier
     private
 
     def update
-      splat = [@url, @version]
+      splat = [@url]
       splat += @attr.reject { |k, _v| RESERVED.include?(k) }.values
       new = UpstreamNotifier::Plugin.send(@plugin.to_sym, *splat)
       return @version if new.eql?(@version)

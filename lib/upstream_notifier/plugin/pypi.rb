@@ -3,13 +3,12 @@ require 'open-uri'
 
 module UpstreamNotifier
   class Pypi
-    def initialize(uri, old, *_args)
+    def initialize(uri, *_args)
       @uri = if uri =~ %r{http(s)://pypi.org/project}
                uri
              else
                'https://pypi.org/project/' + uri
              end
-      @old = old
       @xml = Nokogiri::HTML(open(@uri, 'r:UTF-8'))
     end
 

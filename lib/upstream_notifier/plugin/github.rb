@@ -4,35 +4,34 @@ require 'date'
 
 module UpstreamNotifier
   class Github
-    def initialize(uri, old, *args)
-      @old = old
+    def initialize(uri, *args)
       branch, @git = args
       branch ||= 'master'
+      @git ||= false
       uri = 'https://github.com/' + uri.sub(%r{http(s)?://github\.com/}, '')
       @release_xml = Nokogiri::HTML(open(uri + '/releases', 'r:UTF-8'))
       @commit_xml = Nokogiri::HTML(open(uri + '/commits/' + branch, 'r:UTF-8'))
     end
 
     def get
-      if release.nil?
-        '0.0.0+git' + commit_date.strftime('%Y%m%d') + '.' + commit
-      elsif @git.nil? && (Date.today - release_date).to_i > 180
+      rel = release
+      if @git && (Date.today - release_date).to_i > 180
         # if use_git, git version will be used when the release was made
         # more than 6 months ago.
-        release + '+git' + commit_date.strftime('%Y%m%d') + '.' + commit
+        "#{rel}+git#{commit_date.strftime('%Y%m%d')}.#{commit}"
       else
-        release
+        rel
       end
     end
 
     def release
       page = @release_xml.xpath('//span[@class="tag-name"]')
-      page.empty? ? nil : page.first.text
+      page.empty? ? '0.0.0' : page.first.text
     end
 
     def release_date
-      Date.parse(@release_xml.xpath('//span[@class="date"]/relative-time')
-          .first.values[0])
+      page = @release_xml.xpath('//span[@class="date"]/relative-time')
+      page.empty? ? Date.today : Date.parse(page.first.values[0])
     end
 
     def commit

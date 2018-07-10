@@ -3,8 +3,8 @@ require 'nokogiri'
 
 module UpstreamNotifier
   class Apache
-    def initialize(url, _version, *_args)
-      @xml = Nokogiri::HTML(open(url).read)
+    def initialize(uri, *_args)
+      @xml = Nokogiri::HTML(open(uri).read)
     end
 
     def get

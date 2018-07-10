@@ -3,13 +3,12 @@ require 'open-uri'
 
 module UpstreamNotifier
   class Rubygem
-    def initialize(uri, old, *_args)
+    def initialize(uri, *_args)
       @uri = if uri =~ /http/
                uri
              else
                'https://rubygems.org/gems/' + uri
              end
-      @old = old
       @xml = Nokogiri::HTML(open(@uri, 'r:UTF-8'))
     end
 

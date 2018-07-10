@@ -198,8 +198,8 @@ libgooglepinyin:
   maintainer: example@example.com,example
 fwnn:
   version: 1.1.1a023
-  plugin: sourceforgejp
-  url: http://freewnn.sourceforge.jp
+  plugin: osdnjp
+  url: https://zh.osdn.net/projects/freewnn
   notifier: all
   maintainer: example@example.com,example
 gcin:
@@ -227,9 +227,10 @@ emacs-apel:
   notifier: all
   maintainer: example@example.com,example
 cmuclmtk:
+  name: cmuclmtk
   version: 0.7
   plugin: sourceforge
-  url: cmusphinx
+  url: https://sourceforge.net/projects/cmusphinx
   notifier: all
   maintainer: example@example.com,example
 ddskk:
