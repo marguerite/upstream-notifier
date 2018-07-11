@@ -66,7 +66,8 @@ module UpstreamNotifier
     end
 
     def bot_init
-      return nil, false unless @packages.map(&:notifier).include?('irc')
+      notifiers = @packages.map(&:notifier).uniq
+      return nil, false unless notifiers.include?('irc') || notifiers.include?('all')
       [UpstreamNotifier::IRCBot.new(@option), true]
     end
   end

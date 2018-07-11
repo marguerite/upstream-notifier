@@ -16,6 +16,8 @@ brise:
   plugin: github
   url: lotem/brise
   maintainer: example@example.com,example
+  notifier: all
+  maintainer: example@example.com,example
 librime:
   version: 1.2.9+git20160226.df4192c
   plugin: github
@@ -108,7 +110,7 @@ gnugo:
   maintainer: example@example.com,example
 rubygem-qtbindings:
   version: 4.8.6.2
-  plugin: rubygems
+  plugin: rubygem
   url: qtbindings
   notifier: all
   maintainer: example@example.com,example

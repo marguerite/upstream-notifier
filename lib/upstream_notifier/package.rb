@@ -1,6 +1,6 @@
 module UpstreamNotifier
   class Package
-    RESERVED = [%w(url version plugin notifier maintainer file)].freeze
+    RESERVED = %w(url version plugin notifier maintainer file).freeze
 
     def initialize(name, attr)
       @name = name

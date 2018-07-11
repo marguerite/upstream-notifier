@@ -9,8 +9,8 @@ module UpstreamNotifier
       branch ||= 'master'
       @git ||= false
       uri = 'https://github.com/' + uri.sub(%r{http(s)?://github\.com/}, '')
-      @release_xml = Nokogiri::HTML(open(uri + '/releases', 'r:UTF-8'))
-      @commit_xml = Nokogiri::HTML(open(uri + '/commits/' + branch, 'r:UTF-8'))
+      @release_xml = Nokogiri::HTML(open(uri + '/releases', 'r:UTF-8').read)
+      @commit_xml = Nokogiri::HTML(open(uri + '/commits/' + branch, 'r:UTF-8').read)
     end
 
     def get
