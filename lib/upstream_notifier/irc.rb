@@ -10,6 +10,7 @@ module UpstreamNotifier
 
     def say(msg)
       @socket.puts("PRIVMSG ##{@option['channel']} :#{msg}\n")
+      sleep 5
     end
 
     private
